@@ -46,15 +46,11 @@ html {
 
 body {
 	width: 100vw;
-  //TODO: max-width 확인 필요
-	max-width: 440px;
-	overflow-x: hidden;
 	background-color: white;
 	color: black;
   font-synthesis: none;
 	scrollbar-width: none; 
 	-ms-overflow-style: none;
-  border: 1px solid black;
 
 	::-webkit-scrollbar {
     display: none;
