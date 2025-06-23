@@ -92,7 +92,7 @@ button:active {
 
 @font-face {
     font-family: 'pretendard';
-    src: url('https://fastly.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/PretendardVariable.woff2') format('woff2');
+    src: url("/fonts/PretendardVariable.woff2") format('woff2');
 }
 
 
