@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 
 import styled from "styled-components";
+import Header from "./headers/Header";
 
 const DefaultLayout = () => {
   return (
     <OutletWrapper>
+      <Header />
       <Outlet />
     </OutletWrapper>
   );
