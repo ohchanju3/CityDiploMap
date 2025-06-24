@@ -36,7 +36,6 @@ export default LanguageModal;
 const ModalWrapper = styled.div`
   position: absolute;
   top: 40px;
-  right: -25px;
   padding: 0.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -82,15 +81,15 @@ const Button = styled.button<{ selected?: boolean }>`
   width: 100%;
   text-align: left;
 
-  ${({ selected }) =>
+  ${({ selected, theme }) =>
     selected
       ? css`
           background: #eef2f7;
-          color: #063a74;
+          color: ${theme.colors.blue01};
           ${fonts.cap16B}
         `
       : css`
           background: transparent;
-          color: inherit;
+          color: ${theme.colors.gray02};
         `}
 `;

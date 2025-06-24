@@ -10,8 +10,7 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  padding: 2.19rem 3.75rem 0px 3.75rem;
-  gap: 1.56rem;
+  padding: 50px 60px 0px 60px;
 `;
 
 export default Header;
