@@ -31,6 +31,7 @@ const GnbWrapper = styled.div`
   gap: 1rem;
   width: 100%;
   border-top: 1px solid ${({ theme }) => theme.colors.gray05};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray05};
 `;
 
 const GnbContainer = styled.section`
