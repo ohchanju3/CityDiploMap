@@ -19,7 +19,7 @@ const Gnb = () => {
       {gnbItem.map((item) => (
         <GnbContainer key={item.label} onClick={() => navigate(item.onClick)}>
           <p>{item.label} </p>
-          <img src="/icon/arrowDown.svg" />
+          <img src="/icons/arrowDown.svg" />
         </GnbContainer>
       ))}
     </GnbWrapper>
