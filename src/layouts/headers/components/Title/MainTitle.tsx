@@ -37,7 +37,7 @@ const MainTitleWrapper = styled.section<{
 }>`
   display: flex;
   flex-direction: column;
-  gap: 0.94rem;
+  gap: ${({ $type }) => ($type === "contentTitle" ? "1.25rem" : "0.94rem")};
   margin-top: ${({ $marginTop }) => $marginTop};
 
   h1 {
@@ -49,6 +49,8 @@ const MainTitleWrapper = styled.section<{
 
   sub {
     ${fonts.body20S}
+    ${({ $type }) =>
+      $type === "contentTitle" ? fonts.subtitle24B : fonts.body20S};
     color: ${({ theme }) => theme.colors.gray04};
   }
 `;
