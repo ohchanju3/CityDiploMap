@@ -25,6 +25,7 @@ export const fonts = {
 
   //subtitle
   subtitle24B: fontGenerator(700, "24px"),
+  subtitle28B: fontGenerator(700, "28px"),
 
   //body
   body20B: fontGenerator(700, "20px"),
