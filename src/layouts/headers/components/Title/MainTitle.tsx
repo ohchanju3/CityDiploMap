@@ -6,6 +6,7 @@ interface MainTitleProps {
   subtitle?: string;
   marginTop?: string;
   type?: "mainTitle" | "contentTitle";
+  rightBtn?: React.ReactNode;
 }
 
 const MainTitle = ({
@@ -13,11 +14,19 @@ const MainTitle = ({
   subtitle,
   marginTop = "3.44rem",
   type = "mainTitle",
+  rightBtn,
 }: MainTitleProps) => {
   return (
     <MainTitleWrapper $marginTop={marginTop} $type={type}>
-      <h1>{title}</h1>
-      {subtitle && <p>{subtitle}</p>}
+      {rightBtn ? (
+        <HeaderContainer>
+          <h1>{title}</h1>
+          {rightBtn}
+        </HeaderContainer>
+      ) : (
+        <h1>{title}</h1>
+      )}
+      {subtitle && <sub>{subtitle}</sub>}
     </MainTitleWrapper>
   );
 };
@@ -38,9 +47,15 @@ const MainTitleWrapper = styled.section<{
     color: ${({ theme }) => theme.colors.gray01};
   }
 
-  p {
+  sub {
     ${fonts.body20S}
     color: ${({ theme }) => theme.colors.gray04};
   }
+`;
+
+const HeaderContainer = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 export default MainTitle;

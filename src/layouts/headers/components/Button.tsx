@@ -19,6 +19,7 @@ const Button = ({ onClick, text, img }: ButtonProps) => {
 const ButtonWrapper = styled.button`
   display: flex;
   width: fit-content;
+  height: 52px;
   padding: 14px 27px;
   border-radius: 30px;
   background-color: ${({ theme }) => theme.colors.blue01};
