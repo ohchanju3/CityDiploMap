@@ -14,18 +14,18 @@ interface FilterContainerProps {
 
 const FilterContainer = ({ filters }: FilterContainerProps) => {
   return (
-    <Wrapper>
+    <FilterContainerWrapper>
       {filters.map((filter) => (
         <FilterItem key={filter.title} {...filter} />
       ))}
-    </Wrapper>
+    </FilterContainerWrapper>
   );
 };
 
 export default FilterContainer;
 
-// ---------- Styled ----------
-const Wrapper = styled.div`
+const FilterContainerWrapper = styled.div`
+  margin-top: 2.81rem;
   width: 100%;
   padding: 2.12rem 3.06rem;
   display: flex;

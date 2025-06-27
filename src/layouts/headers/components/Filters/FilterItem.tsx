@@ -26,8 +26,8 @@ const FilterItem = ({
   };
 
   return (
-    <Container>
-      <Title>{title}</Title>
+    <FilterItemWrapper>
+      <FilterItemTitle>{title}</FilterItemTitle>
       <DropdownWrapper>
         <DropdownButton onClick={toggleDropdown} $hasValue={!!selected}>
           {selected || placeholder}
@@ -46,20 +46,19 @@ const FilterItem = ({
           </DropdownList>
         )}
       </DropdownWrapper>
-    </Container>
+    </FilterItemWrapper>
   );
 };
 
 export default FilterItem;
 
-// ---------- Styled ----------
-const Container = styled.div`
+const FilterItemWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
 `;
 
-const Title = styled.p`
+const FilterItemTitle = styled.p`
   ${fonts.body18S}
   color: ${({ theme }) => theme.colors.gray01};
 `;
