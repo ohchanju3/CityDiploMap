@@ -2,12 +2,15 @@ import { Outlet } from "react-router-dom";
 
 import styled from "styled-components";
 import Header from "./headers/Header";
+import FlexLayout from "./FlexLayout";
 
 const DefaultLayout = () => {
   return (
     <OutletWrapper>
       <Header />
-      <Outlet />
+      <FlexLayout>
+        <Outlet />
+      </FlexLayout>
     </OutletWrapper>
   );
 };

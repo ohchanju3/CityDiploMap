@@ -22,11 +22,11 @@ const HeaderTop = () => {
 
   return (
     <HeaderTopWrapper>
-      <img src="/icon/logo.svg" onClick={() => navigate("/")} />
+      <img src="/icons/logo.svg" onClick={() => navigate("/")} />
       <HeaderTopLang onClick={() => setIsOpen(!isOpen)}>
-        <HeaderTopLagIcon src="/icon/globe.svg" />
+        <HeaderTopLagIcon src="/icons/globe.svg" />
         Language
-        <HeaderTopLagIcon src="/icon/arrowDown.svg" />
+        <HeaderTopLagIcon src="/icons/arrowDown.svg" />
       </HeaderTopLang>
 
       {isOpen && (
