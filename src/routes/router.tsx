@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "@layouts/DefaultLayout";
 import PrivateRoute from "@layouts/PrivateLayout";
 import GuestLayout from "@layouts/GuestLayout";
+import Mainpage from "@pages/Mainpage";
 
 //TODO: 플젝에 따라 다르게 설정 필요
 const router = createBrowserRouter([
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         element: <GuestLayout />,
-        children: [],
+        children: [{ path: "/", element: <Mainpage /> }],
       },
       {
         element: <PrivateRoute />,
