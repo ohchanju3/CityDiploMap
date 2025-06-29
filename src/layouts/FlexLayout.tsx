@@ -14,6 +14,7 @@ const FlexLayoutWrapper = styled.div`
   flex-direction: column;
   padding-left: 60px;
   padding-right: 60px;
+  margin-bottom: 9.06rem;
 `;
 
 export default FlexLayout;

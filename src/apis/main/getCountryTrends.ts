@@ -1,4 +1,4 @@
-import { dummyCountryTrends } from "@apis/dummy/countryTrends";
+import { dummyCountryTrends } from "@apis/dummy/dummyCountryTrends";
 import { getResponse } from "@apis/instance";
 
 export interface TrendItem {
