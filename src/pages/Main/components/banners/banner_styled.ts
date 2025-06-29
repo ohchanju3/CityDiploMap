@@ -51,10 +51,11 @@ export const Pagination = styled.div`
   gap: 0.5rem;
 `;
 
-export const Dot = styled.div<{ $active: boolean }>`
+export const Dot = styled.div<{ $active: boolean; $color?: string }>`
   height: 0.5rem;
   border-radius: 1rem;
-  background-color: ${({ theme }) => theme.colors.blue01};
+  background-color: ${({ theme, $color }) =>
+    $color === "green" ? theme.colors.green01 : theme.colors.blue01};
   opacity: ${({ $active }) => ($active ? 1 : 0.3)};
   width: ${({ $active }) => ($active ? "2rem" : "0.5rem")};
   transition: width 0.3s ease;

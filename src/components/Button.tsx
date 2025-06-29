@@ -6,27 +6,43 @@ interface ButtonProps {
   text: string;
   img?: string;
   disabled?: boolean;
+  bgColor?: string;
 }
 
-const Button = ({ onClick, text, img, disabled = false }: ButtonProps) => {
+const Button = ({
+  onClick,
+  text,
+  img,
+  disabled = false,
+  bgColor,
+}: ButtonProps) => {
   return (
-    <ButtonWrapper type="button" onClick={onClick} disabled={disabled}>
+    <ButtonWrapper
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      $bgColor={bgColor}
+    >
       <p>{text}</p>
       {img && <img src={img} />}
     </ButtonWrapper>
   );
 };
 
-const ButtonWrapper = styled.button<{ disabled: boolean }>`
+const ButtonWrapper = styled.button<{ disabled: boolean; $bgColor?: string }>`
   display: flex;
   width: fit-content;
   height: 52px;
   padding: 14px 27px;
   border-radius: 30px;
-  background-color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray05 : theme.colors.blue01};
-  color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.gray07 : theme.colors.gray07};
+
+  background-color: ${({ theme, disabled, $bgColor }) => {
+    if (disabled) return theme.colors.gray05;
+    if ($bgColor === "green") return theme.colors.green01;
+    return theme.colors.blue01;
+  }};
+
+  color: ${({ theme }) => theme.colors.gray07};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   gap: 10px;
   ${fonts.body20S}
