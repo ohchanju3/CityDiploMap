@@ -1,9 +1,21 @@
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import type { CountryTrendsCardProps } from "../CountryTrends/CountryTrendsCard";
+import Chip from "@components/ChipBadge";
 
-const DiplomacyEventCard = ({ title, content, id }: CountryTrendsCardProps) => {
+interface DiplomacyEventCardProps {
+  title: string;
+  id: number;
+  category: string;
+  content: string;
+}
+
+const DiplomacyEventCard = ({
+  title,
+  content,
+  id,
+  category,
+}: DiplomacyEventCardProps) => {
   const navigate = useNavigate();
 
   //TODO: 경로 수정 필요 ~~
@@ -13,6 +25,7 @@ const DiplomacyEventCard = ({ title, content, id }: CountryTrendsCardProps) => {
 
   return (
     <DiplomacyEventCardWrapper>
+      <Chip text={category} />
       <DiplomacyEventCardTextContainer>
         <h1>{title}</h1>
         <p>{content}</p>
@@ -51,7 +64,7 @@ const DiplomacyEventCardTextContainer = styled.section`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 `;

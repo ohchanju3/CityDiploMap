@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import type { TrendItem } from "@apis/main/getCountryTrends";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
+import type { EventItem } from "@apis/main/getDipEvent";
 
 interface CountryTrendCardListProps {
-  data: TrendItem[];
+  data: EventItem[];
 }
 
 const ITEMS_PER_VIEW = 3;

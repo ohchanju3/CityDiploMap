@@ -8,6 +8,7 @@ import {
   type TrendItem,
 } from "@apis/main/getCountryTrends";
 import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
+import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
 
 const COUNTRY_LIST = [
   "전체",
@@ -21,6 +22,7 @@ const COUNTRY_LIST = [
 const Mainpage = () => {
   const [selectedCountry, setSelectedCountry] = useState("전체");
   const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
+  const [EventData, setEventData] = useState<EventItem[]>([]);
 
   useEffect(() => {
     const loadTrends = async () => {
@@ -30,6 +32,15 @@ const Mainpage = () => {
 
     loadTrends();
   }, [selectedCountry]);
+
+  useEffect(() => {
+    const loadEvent = async () => {
+      const data = await getDipEvent();
+      setEventData(data);
+    };
+
+    loadEvent();
+  });
 
   return (
     <>
@@ -48,7 +59,7 @@ const Mainpage = () => {
       <CountryTrendsContainer data={trendsData} />
 
       <MainTitle title="공공외교 행사 안내" />
-      <DiplomacyEventList data={trendsData} />
+      <DiplomacyEventList data={EventData} />
     </>
   );
 };
