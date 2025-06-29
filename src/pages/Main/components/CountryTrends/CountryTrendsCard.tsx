@@ -1,19 +1,27 @@
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export interface CountryTrendsCardProps {
   img?: string;
   title: string;
   content: string;
-  onClick: () => void;
+  id?: number;
 }
 
 const CountryTrendsCard = ({
   img,
   title,
   content,
-  onClick,
+  id,
 }: CountryTrendsCardProps) => {
+  const navigate = useNavigate();
+
+  //TODO: 경로 수정 필요 ~~
+  const handleClick = () => {
+    navigate(`/my/${id}`);
+  };
+
   return (
     <CountryTrendsCardWrapper>
       <img src={img} />
@@ -22,7 +30,7 @@ const CountryTrendsCard = ({
           <h1>{title}</h1>
           <p>{content}</p>
         </CountryTrendCardText>
-        <span onClick={onClick}>{"자세히 보기 ->"}</span>
+        <span onClick={handleClick}>{"자세히 보기 ->"}</span>
       </CountryTrendsCardTextContainer>
     </CountryTrendsCardWrapper>
   );

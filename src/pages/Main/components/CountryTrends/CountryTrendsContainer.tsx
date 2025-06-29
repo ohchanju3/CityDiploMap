@@ -16,7 +16,7 @@ const CountryTrendsContainer = ({ data }: CountryTrendsContainerProps) => {
           img={item.img}
           title={item.title}
           content={item.content}
-          onClick={item.onClick}
+          id={item.id}
         />
       ))}
     </CardGridWrapper>
