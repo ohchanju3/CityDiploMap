@@ -9,6 +9,8 @@ const RecommendPage = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [purpose, setPurpose] = useState<string | null>(null);
 
+  const isAllSelected = country && city && category && purpose;
+
   const filters = [
     {
       title: "지방자치단체",
@@ -63,6 +65,7 @@ const RecommendPage = () => {
             text="조회하기"
             img="/icons/arrowUpRight.svg"
             onClick={() => alert("api 세팅 필요")}
+            disabled={!isAllSelected}
           />
         }
       />
