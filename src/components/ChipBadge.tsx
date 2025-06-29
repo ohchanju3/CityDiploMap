@@ -20,6 +20,7 @@ const ChipWrapper = styled.section`
   color: ${({ theme }) => theme.colors.blue02};
   ${fonts.cap16S}
   white-space: nowrap;
+  border-radius: 0.25rem;
 `;
 
 export default Chip;
