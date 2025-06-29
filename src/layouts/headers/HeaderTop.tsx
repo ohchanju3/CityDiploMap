@@ -1,7 +1,7 @@
 import { fonts } from "@styles/fonts";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import LanguageModal from "./components/LanguageModal";
+import LanguageModal from "../../components/LanguageModal";
 import { useNavigate } from "react-router-dom";
 
 const HeaderTop = () => {

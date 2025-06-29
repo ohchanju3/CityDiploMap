@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import HeaderTop from "./HeaderTop";
-import Gnb from "./components/Gnb";
+import Gnb from "../../components/Gnb";
 
 const Header = () => {
   return (

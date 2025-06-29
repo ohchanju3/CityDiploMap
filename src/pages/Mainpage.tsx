@@ -1,4 +1,4 @@
-import MainTitle from "@layouts/headers/components/Title/MainTitle";
+import MainTitle from "src/components/Title/MainTitle";
 
 const Mainpage = () => {
   return (
