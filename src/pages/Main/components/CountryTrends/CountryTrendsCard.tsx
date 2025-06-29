@@ -83,7 +83,6 @@ const CountryTrendCardText = styled.section`
   p {
     ${fonts.body18M};
     color: ${({ theme }) => theme.colors.gray03};
-    overflow: hidden;
     white-space: pre-line;
     overflow: hidden;
     text-overflow: ellipsis;

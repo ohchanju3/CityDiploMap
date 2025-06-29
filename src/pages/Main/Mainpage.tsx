@@ -7,6 +7,7 @@ import {
   fetchTrendsByCountry,
   type TrendItem,
 } from "@apis/main/getCountryTrends";
+import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
 
 const COUNTRY_LIST = [
   "전체",
@@ -45,6 +46,9 @@ const Mainpage = () => {
         ))}
       </CountryTabWrapper>
       <CountryTrendsContainer data={trendsData} />
+
+      <MainTitle title="공공외교 행사 안내" />
+      <DiplomacyEventList data={trendsData} />
     </>
   );
 };
