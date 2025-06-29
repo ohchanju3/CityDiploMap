@@ -3,23 +3,32 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./headers/Header";
 import FlexLayout from "./FlexLayout";
+import Footer from "./footers/Footer";
 
 const DefaultLayout = () => {
   return (
-    <OutletWrapper>
+    <LayoutWrapper>
       <Header />
-      <FlexLayout>
-        <Outlet />
-      </FlexLayout>
-    </OutletWrapper>
+      <ContentWrapper>
+        <FlexLayout>
+          <Outlet />
+        </FlexLayout>
+      </ContentWrapper>
+      <Footer />
+    </LayoutWrapper>
   );
 };
 
 export default DefaultLayout;
 
-const OutletWrapper = styled.section`
+const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: auto;
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
