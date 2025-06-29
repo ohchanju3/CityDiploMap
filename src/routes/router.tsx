@@ -6,8 +6,9 @@ import PrivateRoute from "@layouts/PrivateLayout";
 import GuestLayout from "@layouts/GuestLayout";
 import Mainpage from "@pages/Main/Mainpage";
 import RecommendPage from "@pages/recommend/RecommendPage";
+import ExchangeStatusPage from "@pages/cooperation/ExchangeStatusPage";
+import PublicDiplomacyPage from "@pages/citizen/PublicDiplomacyPage";
 
-//TODO: 플젝에 따라 다르게 설정 필요
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,8 @@ const router = createBrowserRouter([
         children: [
           { path: "/", element: <Mainpage /> },
           { path: "/recommend", element: <RecommendPage /> },
+          { path: "/citizen", element: <PublicDiplomacyPage /> },
+          { path: "/cooperation", element: <ExchangeStatusPage /> },
         ],
       },
       {

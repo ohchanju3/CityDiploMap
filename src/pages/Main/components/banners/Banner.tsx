@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as s from "./banner_styled";
 import Button from "@components/Button";
+import { useNavigate } from "react-router-dom";
 
 const images = [
-  "/images/main/banner1.png",
-  "/images/main/banner1.png",
-  "/images/main/banner1.png",
+  {
+    src: "/images/main/banner2.png",
+    buttonText: "자세히 보기",
+    buttonColor: "green",
+    link: "/cooperation",
+  },
+  {
+    src: "/images/main/banner1.png",
+    buttonText: "자세히 보기",
+    buttonColor: "blue",
+    link: "/recommend",
+  },
+  {
+    src: "/images/main/banner3.png",
+    buttonText: "자세히 보기",
+    buttonColor: "blue",
+    link: "/citizen",
+  },
 ];
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
   const total = images.length;
+  const currentBanner = images[currentIndex];
+
   const handleDotClick = (idx: number) => {
     setCurrentIndex(idx);
   };
@@ -23,15 +42,25 @@ const Banner = () => {
     setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
   };
 
+  // 자동 슬라이드
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [total]);
+
   return (
     <s.BannerWrapper>
-      <s.SlideImage src={images[currentIndex]} alt={`banner-${currentIndex}`} />
+      <s.SlideImage src={currentBanner.src} alt={`banner-${currentIndex}`} />
 
       <s.ButtonContainer>
         <Button
-          text="자세히 보기"
+          text={currentBanner.buttonText}
           img="/icons/arrowUpRight.svg"
-          onClick={() => alert("교류협력현황으로 이동 필요")}
+          onClick={() => navigate(currentBanner.link)}
+          bgColor={currentBanner.buttonColor}
         />
       </s.ButtonContainer>
 
@@ -47,6 +76,7 @@ const Banner = () => {
           <s.Dot
             key={idx}
             $active={idx === currentIndex}
+            $color={currentBanner.buttonColor}
             onClick={() => handleDotClick(idx)}
           />
         ))}

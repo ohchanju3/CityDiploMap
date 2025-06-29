@@ -54,7 +54,7 @@ const Mainpage = () => {
   return (
     <>
       <Banner />
-      <MainTitle title="국가별 최신 동향" />
+      <MainTitle title="국가별 최신 동향" marginTop="5rem" />
       <CountryTabWrapper>
         {COUNTRY_LIST.map((country) => (
           <CountryTab
@@ -70,6 +70,7 @@ const Mainpage = () => {
 
       <MainTitle
         title="공공외교 행사 안내"
+        marginTop="6.25rem"
         rightBtn={
           <>
             <RightBtnWrapper onClick={handleClick}>
