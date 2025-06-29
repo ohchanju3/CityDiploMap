@@ -1,7 +1,7 @@
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
 
-interface CountryTrendsCardProps {
+export interface CountryTrendsCardProps {
   img?: string;
   title: string;
   content: string;
