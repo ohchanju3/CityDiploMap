@@ -10,6 +10,7 @@ import {
 import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
 import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
 import { useNavigate } from "react-router-dom";
+import Banner from "./components/banners/Banner";
 
 const COUNTRY_LIST = [
   "전체",
@@ -52,6 +53,7 @@ const Mainpage = () => {
 
   return (
     <>
+      <Banner />
       <MainTitle title="국가별 최신 동향" />
       <CountryTabWrapper>
         {COUNTRY_LIST.map((country) => (

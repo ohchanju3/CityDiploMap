@@ -30,6 +30,10 @@ const ButtonWrapper = styled.button<{ disabled: boolean }>`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   gap: 10px;
   ${fonts.body20S}
+
+  p {
+    white-space: nowrap;
+  }
 `;
 
 export default Button;

@@ -1,27 +1,32 @@
 import { fonts } from "@styles/fonts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const gnbItem = [
-  { label: "도시 외교 현황", onClick: "/" },
-  { label: "국별 동향 분석", onClick: "/" },
-  { label: "교류 전략 추천", onClick: "/" },
-  { label: "환경외교 허브", onClick: "/" },
-  { label: "성과 뷰어", onClick: "/" },
-  { label: "사례 데이터 뱅크", onClick: "/" },
-  { label: "시민 외교 스테이션", onClick: "/" },
+  { label: "교류 협력 현황", onClick: "/" },
+  { label: "교류 전략 추천", onClick: "/recommend" },
+  { label: "시민 외교 참여", onClick: "/" },
 ];
 
 const Gnb = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <GnbWrapper>
-      {gnbItem.map((item) => (
-        <GnbContainer key={item.label} onClick={() => navigate(item.onClick)}>
-          <p>{item.label} </p>
-          <img src="/icons/arrowDown.svg" />
-        </GnbContainer>
-      ))}
+      {gnbItem.map((item) => {
+        const isActive = location.pathname === item.onClick;
+        return (
+          <GnbContainer
+            key={item.label}
+            $isActive={isActive}
+            onClick={() => navigate(item.onClick)}
+          >
+            <p>{item.label}</p>
+            <img src="/icons/arrowDown.svg" />
+          </GnbContainer>
+        );
+      })}
     </GnbWrapper>
   );
 };
@@ -34,15 +39,16 @@ const GnbWrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray05};
 `;
 
-const GnbContainer = styled.section`
+const GnbContainer = styled.section<{ $isActive: boolean }>`
   ${fonts.header20B};
   height: 56px;
   padding: 0px 16px;
-  color: ${({ theme }) => theme.colors.gray02};
   display: flex;
   align-items: center;
   gap: 3px;
   cursor: pointer;
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.blue01 : theme.colors.gray02};
 
   img {
     width: 20px;
