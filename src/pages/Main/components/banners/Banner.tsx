@@ -14,7 +14,7 @@ const images = [
     src: "/images/main/banner2.png",
     buttonText: "자세히 보기",
     buttonColor: "green",
-    link: "/people",
+    link: "/citizen",
   },
 ];
 

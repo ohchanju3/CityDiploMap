@@ -3,9 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const gnbItem = [
-  { label: "교류 협력 현황", onClick: "/" },
+  { label: "교류 협력 현황", onClick: "/cooperation" },
   { label: "교류 전략 추천", onClick: "/recommend" },
-  { label: "시민 외교 참여", onClick: "/" },
+  { label: "시민 외교 참여", onClick: "/citizen" },
 ];
 
 const Gnb = () => {
