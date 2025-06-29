@@ -9,6 +9,7 @@ import {
 } from "@apis/main/getCountryTrends";
 import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
 import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
+import { useNavigate } from "react-router-dom";
 
 const COUNTRY_LIST = [
   "전체",
@@ -42,6 +43,13 @@ const Mainpage = () => {
     loadEvent();
   });
 
+  const navigate = useNavigate();
+
+  //TODO: 경로 수정 필요 ~~
+  const handleClick = () => {
+    navigate(`/my`);
+  };
+
   return (
     <>
       <MainTitle title="국가별 최신 동향" />
@@ -58,7 +66,17 @@ const Mainpage = () => {
       </CountryTabWrapper>
       <CountryTrendsContainer data={trendsData} />
 
-      <MainTitle title="공공외교 행사 안내" />
+      <MainTitle
+        title="공공외교 행사 안내"
+        rightBtn={
+          <>
+            <RightBtnWrapper onClick={handleClick}>
+              <p>더보기</p>
+              <img src="/icons/more.svg" />
+            </RightBtnWrapper>
+          </>
+        }
+      />
       <DiplomacyEventList data={EventData} />
     </>
   );
@@ -87,4 +105,13 @@ const CountryTab = styled.section<{ $isActive: boolean }>`
   ${fonts.body18S}
 `;
 
+const RightBtnWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  ${fonts.body18M}
+  color: ${({ theme }) => theme.colors.gray02};
+  cursor: pointer;
+`;
 export default Mainpage;
