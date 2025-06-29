@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as s from "./banner_styled";
 import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
 
 const images = [
+  {
+    src: "/images/main/banner2.png",
+    buttonText: "자세히 보기",
+    buttonColor: "green",
+    link: "/cooperation",
+  },
   {
     src: "/images/main/banner1.png",
     buttonText: "자세히 보기",
@@ -11,21 +17,22 @@ const images = [
     link: "/recommend",
   },
   {
-    src: "/images/main/banner2.png",
+    src: "/images/main/banner3.png",
     buttonText: "자세히 보기",
-    buttonColor: "green",
+    buttonColor: "blue",
     link: "/citizen",
   },
 ];
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentBanner = images[currentIndex];
+  const navigate = useNavigate();
   const total = images.length;
+  const currentBanner = images[currentIndex];
+
   const handleDotClick = (idx: number) => {
     setCurrentIndex(idx);
   };
-  const navigate = useNavigate();
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
@@ -34,6 +41,15 @@ const Banner = () => {
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
   };
+
+  // 자동 슬라이드
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [total]);
 
   return (
     <s.BannerWrapper>
