@@ -1,6 +1,6 @@
-import Button from "@layouts/headers/components/Button";
-import FilterContainer from "@layouts/headers/components/Filters/FilterContainer";
-import MainTitle from "@layouts/headers/components/MainTitle";
+import Button from "src/components/Button";
+import FilterContainer from "src/components/Filters/FilterContainer";
+import MainTitle from "src/components/MainTitle";
 import { useState } from "react";
 
 const RecommendPage = () => {
