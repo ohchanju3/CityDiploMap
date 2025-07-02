@@ -1,11 +1,11 @@
 import MainTitle from "@components/MainTitle";
 import ExchangeCaseCard from "./ExchangeCaseCard";
 import styled from "styled-components";
-import type { ExchangeExample } from "@apis/cooperation/getCountryExchageCase";
+import type { ExchangeCaseData } from "@apis/cooperation/getCountryExchageCase";
 
 interface Props {
   country: string;
-  data: ExchangeExample[];
+  data: ExchangeCaseData[];
 }
 
 const CountryExchangeCase = ({ country, data }: Props) => {
