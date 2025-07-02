@@ -4,8 +4,9 @@ import Button from "@components/Button";
 import FilterContainer from "@components/Filters/FilterContainer";
 import MainTitle from "@components/MainTitle";
 import ExchangeStatusTabs from "./components/ExchangeStatusTabs";
-import { CITY_OPTIONS, COUNTRY_OPTIONS } from "src/constants/filterOptions";
 import CountryMap from "./components/country/CountryMap";
+import CountryCategory from "./components/country/CountryCategory";
+import { CITY_OPTIONS, COUNTRY_OPTIONS } from "@constants/filterOptions";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -55,7 +56,12 @@ const ExchangeStatusPage = () => {
             ]}
           />
 
-          {isSubmitted && country && <CountryMap country={country} />}
+          {isSubmitted && country && (
+            <>
+              <CountryMap country={country} />
+              <CountryCategory country={country} />
+            </>
+          )}
         </>
       )}
 

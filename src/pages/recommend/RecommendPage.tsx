@@ -7,7 +7,7 @@ import {
   CITY_OPTIONS,
   COUNTRY_OPTIONS,
   PURPOSE_OPTIONS,
-} from "src/constants/filterOptions";
+} from "@constants/filterOptions";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);

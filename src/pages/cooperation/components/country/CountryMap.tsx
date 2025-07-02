@@ -1,7 +1,7 @@
 import MainTitle from "@components/MainTitle";
 import styled from "styled-components";
 
-interface CountryMapProps {
+export interface CountryProps {
   country: string | null;
 }
 
@@ -13,7 +13,7 @@ const countryImageMap: Record<string, string> = {
   에티오피아: "Ethiopia.png",
 };
 
-const CountryMap = ({ country }: CountryMapProps) => {
+const CountryMap = ({ country }: CountryProps) => {
   const imageSrc = country ? `/images/country/${countryImageMap[country]}` : "";
 
   return (
@@ -24,11 +24,7 @@ const CountryMap = ({ country }: CountryMapProps) => {
             <Blue>{country}</Blue> 교류 협력 현황을 살펴보세요!
           </>
         }
-        subtitle={
-          country
-            ? `우리나라와 ${country} 간의 협력 이력, 주요 교류 분야와 사업 수 추이를 확인해보세요.`
-            : ""
-        }
+        subtitle={`우리나라와 ${country} 간의 협력 이력, 주요 교류 분야와 사업 수 추이를 확인해보세요.`}
         type="contentTitle"
       />
       <CountryMapWrapper>
@@ -45,7 +41,6 @@ const CountryMapWrapper = styled.section`
   margin-top: 6.81rem;
   padding-bottom: 6.25rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.blue05};
-  margin-bottom: 6.25rem;
 
   img {
     width: 1010.335px;
