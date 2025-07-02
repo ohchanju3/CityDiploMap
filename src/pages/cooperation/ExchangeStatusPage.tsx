@@ -11,6 +11,11 @@ import {
   getCountryRatio,
   type CategoryRatioData,
 } from "@apis/cooperation/getCountryRatio";
+import CountryExchangeCase from "./components/country/CountryExchangeCase";
+import {
+  getCountryExchageCase,
+  type ExchangeExample,
+} from "@apis/cooperation/getCountryExchageCase";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -21,17 +26,18 @@ const ExchangeStatusPage = () => {
   const [categoryData, setCategoryData] = useState<CategoryRatioData | null>(
     null
   );
+  const [exchangeExamples, setExchangeExamples] = useState<ExchangeExample[]>(
+    []
+  );
 
   const handleSearchClick = () => {
     setIsSubmitted(true);
-    alert(`${activeTab} API 호출`);
   };
 
   useEffect(() => {
     if (isSubmitted && country) {
-      getCountryRatio(country).then((data) => {
-        setCategoryData(data);
-      });
+      getCountryRatio(country).then(setCategoryData);
+      getCountryExchageCase(country).then(setExchangeExamples);
     }
   }, [isSubmitted, country]);
 
@@ -76,6 +82,7 @@ const ExchangeStatusPage = () => {
             <>
               <CountryMap country={country} />
               <CountryCategory country={country} data={categoryData} />
+              <CountryExchangeCase country={country} data={exchangeExamples} />
             </>
           )}
         </>
