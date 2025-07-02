@@ -18,6 +18,26 @@ import {
 } from "@apis/cooperation/getCountryExchageCase";
 import CountryYearGraph from "./components/country/CountryYearGraph";
 import { getCountryYear } from "@apis/cooperation/getCountryYear";
+import CityMap from "./components/city/CityMap";
+import {
+  getCityRelations,
+  type CityRelationData,
+} from "@apis/cooperation/getCityRelation";
+import CityRanking from "./components/city/CityRanking";
+import {
+  getCityRanking,
+  type CityRankingData,
+} from "@apis/cooperation/getCityRanking";
+import CityExchangeCard from "./components/city/CityExchangeCard";
+import {
+  getCityCategory,
+  type CityCategoryData,
+} from "@apis/cooperation/getCityCategory";
+import CityVision from "./components/city/CityVision";
+import {
+  getCityVision,
+  type CityVisionData,
+} from "@apis/cooperation/getCityVision";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -25,13 +45,13 @@ const ExchangeStatusPage = () => {
   const [city, setCity] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  //-------국가 탭--------------------------------//
   const [categoryData, setCategoryData] = useState<CategoryRatioData | null>(
     null
   );
   const [exchangeExamples, setExchangeExamples] = useState<ExchangeCaseData[]>(
     []
   );
-
   const [yearData, setYearData] = useState<{ year: number; value: number }[]>();
 
   const handleSearchClick = () => {
@@ -56,6 +76,28 @@ const ExchangeStatusPage = () => {
       });
     }
   }, [isSubmitted, country]);
+
+  //-------지자체 탭--------------------------------//
+  const [cityRelationData, setCityRelationData] =
+    useState<CityRelationData | null>(null);
+
+  const [cityRankingData, setCityRankingData] =
+    useState<CityRankingData | null>(null);
+
+  const [cityCategoryData, setCityCategoryData] =
+    useState<CityCategoryData | null>(null);
+
+  const [cityVisionData, setCityVisionData] = useState<CityVisionData | null>(
+    null
+  );
+  useEffect(() => {
+    if (isSubmitted && city) {
+      getCityRelations(city).then(setCityRelationData);
+      getCityRanking(city).then(setCityRankingData);
+      getCityCategory(city).then(setCityCategoryData);
+      getCityVision(city).then(setCityVisionData);
+    }
+  }, [isSubmitted, city]);
 
   return (
     <>
@@ -123,7 +165,7 @@ const ExchangeStatusPage = () => {
           <FilterContainer
             filters={[
               {
-                title: "국가",
+                title: "지방자치단체",
                 options: CITY_OPTIONS,
                 selected: city,
                 onSelect: setCity,
@@ -132,7 +174,19 @@ const ExchangeStatusPage = () => {
             ]}
           />
 
-          {isSubmitted && city && <div>지자체 교류 현황 컴포넌트 넣기</div>}
+          {isSubmitted &&
+            city &&
+            cityRelationData &&
+            cityRankingData &&
+            cityCategoryData &&
+            cityVisionData && (
+              <>
+                <CityMap city={city} data={cityRelationData} />
+                <CityRanking city={city} data={cityRankingData} />
+                <CityExchangeCard city={city} data={cityCategoryData} />
+                <CityVision city={city} data={cityVisionData} />
+              </>
+            )}
         </>
       )}
     </>

@@ -7,9 +7,9 @@ export const COUNTRY_OPTIONS = [
 ];
 
 export const CITY_OPTIONS = [
-  "서울특별시",
+  "경기도",
   "부산광역시",
-  "대구광역시",
+  "서울특별시",
   "인천광역시",
   "제주특별자치도",
 ];
