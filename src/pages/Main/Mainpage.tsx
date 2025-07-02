@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fonts } from "@styles/fonts";
-import MainTitle from "src/components/Title/MainTitle";
 import CountryTrendsContainer from "./components/CountryTrends/CountryTrendsContainer";
 import {
   fetchTrendsByCountry,
@@ -11,6 +10,7 @@ import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
 import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
 import { useNavigate } from "react-router-dom";
 import Banner from "./components/banners/Banner";
+import MainTitle from "@components/MainTitle";
 
 const COUNTRY_LIST = [
   "전체",

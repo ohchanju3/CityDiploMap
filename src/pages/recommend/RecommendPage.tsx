@@ -27,7 +27,13 @@ const RecommendPage = () => {
     },
     {
       title: "국가",
-      options: ["베트남", "우주베키스탄", "인도네시아", "콜롬비아", "케냐"],
+      options: [
+        "베트남",
+        "우주베키스탄",
+        "인도네시아",
+        "콜롬비아",
+        "에티오피아",
+      ],
       selected: country,
       onSelect: setCountry,
       placeholder: "베트남",
