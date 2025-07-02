@@ -2,8 +2,8 @@ import { fonts } from "@styles/fonts";
 import styled from "styled-components";
 
 interface MainTitleProps {
-  title: string;
-  subtitle?: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
   marginTop?: string;
   type?: "mainTitle" | "contentTitle";
   rightBtn?: React.ReactNode;

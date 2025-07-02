@@ -5,15 +5,28 @@ import FilterContainer from "@components/Filters/FilterContainer";
 import MainTitle from "@components/MainTitle";
 import ExchangeStatusTabs from "./components/ExchangeStatusTabs";
 import { CITY_OPTIONS, COUNTRY_OPTIONS } from "src/constants/filterOptions";
+import CountryMap from "./components/country/CountryMap";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
   const [country, setCountry] = useState<string | null>(null);
   const [city, setCity] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSearchClick = () => {
+    setIsSubmitted(true);
+    alert(`${activeTab} API 호출`);
+  };
 
   return (
     <>
-      <ExchangeStatusTabs active={activeTab} onChange={setActiveTab} />
+      <ExchangeStatusTabs
+        active={activeTab}
+        onChange={(tab) => {
+          setActiveTab(tab);
+          setIsSubmitted(false);
+        }}
+      />
 
       {activeTab === "국가" && (
         <>
@@ -24,11 +37,12 @@ const ExchangeStatusPage = () => {
               <Button
                 text="조회하기"
                 img="/icons/arrowUpRight.svg"
-                onClick={() => alert("국가 API 호출")}
+                onClick={handleSearchClick}
                 disabled={!country}
               />
             }
           />
+
           <FilterContainer
             filters={[
               {
@@ -40,6 +54,8 @@ const ExchangeStatusPage = () => {
               },
             ]}
           />
+
+          {isSubmitted && country && <CountryMap country={country} />}
         </>
       )}
 
@@ -52,11 +68,12 @@ const ExchangeStatusPage = () => {
               <Button
                 text="조회하기"
                 img="/icons/arrowUpRight.svg"
-                onClick={() => alert("지자체 API 호출")}
+                onClick={handleSearchClick}
                 disabled={!city}
               />
             }
           />
+
           <FilterContainer
             filters={[
               {
@@ -68,6 +85,8 @@ const ExchangeStatusPage = () => {
               },
             ]}
           />
+
+          {isSubmitted && city && <div>지자체 교류 현황 컴포넌트 넣기</div>}
         </>
       )}
     </>
