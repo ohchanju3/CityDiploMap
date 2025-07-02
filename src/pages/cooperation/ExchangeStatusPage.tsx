@@ -14,8 +14,10 @@ import {
 import CountryExchangeCase from "./components/country/CountryExchangeCase";
 import {
   getCountryExchageCase,
-  type ExchangeExample,
+  type ExchangeCaseData,
 } from "@apis/cooperation/getCountryExchageCase";
+import CountryYearGraph from "./components/country/CountryYearGraph";
+import { getCountryYear } from "@apis/cooperation/getCountryYear";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -26,9 +28,11 @@ const ExchangeStatusPage = () => {
   const [categoryData, setCategoryData] = useState<CategoryRatioData | null>(
     null
   );
-  const [exchangeExamples, setExchangeExamples] = useState<ExchangeExample[]>(
+  const [exchangeExamples, setExchangeExamples] = useState<ExchangeCaseData[]>(
     []
   );
+
+  const [yearData, setYearData] = useState<{ year: number; value: number }[]>();
 
   const handleSearchClick = () => {
     setIsSubmitted(true);
@@ -38,6 +42,18 @@ const ExchangeStatusPage = () => {
     if (isSubmitted && country) {
       getCountryRatio(country).then(setCategoryData);
       getCountryExchageCase(country).then(setExchangeExamples);
+      getCountryYear(country).then((res) => {
+        if (!res) return;
+
+        const formatted = Object.entries(res.yearly_data_count).map(
+          ([year, value]) => ({
+            year: Number(year),
+            value,
+          })
+        );
+
+        setYearData(formatted);
+      });
     }
   }, [isSubmitted, country]);
 
@@ -83,6 +99,7 @@ const ExchangeStatusPage = () => {
               <CountryMap country={country} />
               <CountryCategory country={country} data={categoryData} />
               <CountryExchangeCase country={country} data={exchangeExamples} />
+              <CountryYearGraph country={country} data={yearData} />
             </>
           )}
         </>

@@ -24,7 +24,7 @@ export const postResponse = async <TRequest, TResponse>(
 export const getResponse = async <T>(url: string): Promise<T | null> => {
   try {
     const response = await instance.get(url);
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error("GET 요청 실패:", error);
     return null;

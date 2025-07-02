@@ -1,6 +1,6 @@
-import type { ExchangeExample } from "@apis/cooperation/getCountryExchageCase";
+import type { ExchangeCaseData } from "@apis/cooperation/getCountryExchageCase";
 
-export const dummyCountryCase: ExchangeExample[] = [
+export const dummyCountryCase: ExchangeCaseData[] = [
   {
     exchage_id: 1,
     exchage_name_kr: "한-베 청소년 문화 교류 프로그램",
