@@ -33,6 +33,11 @@ import {
   getCityCategory,
   type CityCategoryData,
 } from "@apis/cooperation/getCityCategory";
+import CityVision from "./components/city/CityVision";
+import {
+  getCityVision,
+  type CityVisionData,
+} from "@apis/cooperation/getCityVision";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -82,11 +87,15 @@ const ExchangeStatusPage = () => {
   const [cityCategoryData, setCityCategoryData] =
     useState<CityCategoryData | null>(null);
 
+  const [cityVisionData, setCityVisionData] = useState<CityVisionData | null>(
+    null
+  );
   useEffect(() => {
     if (isSubmitted && city) {
       getCityRelations(city).then(setCityRelationData);
       getCityRanking(city).then(setCityRankingData);
       getCityCategory(city).then(setCityCategoryData);
+      getCityVision(city).then(setCityVisionData);
     }
   }, [isSubmitted, city]);
 
@@ -169,11 +178,13 @@ const ExchangeStatusPage = () => {
             city &&
             cityRelationData &&
             cityRankingData &&
-            cityCategoryData && (
+            cityCategoryData &&
+            cityVisionData && (
               <>
                 <CityMap city={city} data={cityRelationData} />
                 <CityRanking city={city} data={cityRankingData} />
                 <CityExchangeCard city={city} data={cityCategoryData} />
+                <CityVision city={city} data={cityVisionData} />
               </>
             )}
         </>

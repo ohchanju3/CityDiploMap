@@ -2,23 +2,40 @@ import Chip from "@components/ChipBadge";
 import { fonts } from "@styles/fonts";
 import { CATEGORY_MAP } from "@utils/countryExchangeCaseMap";
 import styled from "styled-components";
-
 interface ExchangeCaseCardProps {
   content: string;
   category: string;
+  title?: string;
+  img?: string;
+  bgColor?: string;
+  useCategoryMap?: boolean;
 }
 
-const ExchangeCaseCard = ({ content, category }: ExchangeCaseCardProps) => {
-  const { label, img, bgColor } = CATEGORY_MAP(category);
+const ExchangeCaseCard = ({
+  content,
+  category,
+  title,
+  img,
+  bgColor,
+  useCategoryMap = true,
+}: ExchangeCaseCardProps) => {
+  const {
+    label,
+    img: mappedImg,
+    bgColor: mappedBgColor,
+  } = useCategoryMap
+    ? CATEGORY_MAP(category) || { label: category, img: "", bgColor: "" }
+    : { label: category, img: img || "", bgColor: bgColor || "" };
 
   return (
     <ExchangeCaseCardWrapper>
-      <ExchangeCaseCardImgContainer $bgColor={bgColor}>
-        <img src={img} alt={label} />
+      <ExchangeCaseCardImgContainer $bgColor={mappedBgColor || "#DFE8F4"}>
+        <img src={mappedImg} alt={label} />
       </ExchangeCaseCardImgContainer>
 
       <ExchangeCaseCardTextContainer>
         <Chip text={label} />
+        {title && <h1>{title}</h1>}
         <p>{content}</p>
       </ExchangeCaseCardTextContainer>
     </ExchangeCaseCardWrapper>
@@ -53,9 +70,15 @@ const ExchangeCaseCardTextContainer = styled.section`
   gap: 1rem;
   padding: 2rem;
 
+  h1 {
+    color: ${({ theme }) => theme.colors.gray01};
+    ${fonts.body20B};
+  }
+
   p {
     color: ${({ theme }) => theme.colors.gray03};
     ${fonts.body18M};
+    white-space: pre-line;
   }
 `;
 
