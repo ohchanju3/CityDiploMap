@@ -98,7 +98,6 @@ const DropdownList = styled.ul`
   border-radius: 0.38rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  max-height: 200px;
   overflow-y: auto;
 `;
 

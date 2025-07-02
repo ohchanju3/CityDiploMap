@@ -31,7 +31,9 @@
       "@layouts/*": ["src/layouts/*"],
       "@apis/*": ["src/apis/*"],
       "@styles/*": ["src/styles/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"]

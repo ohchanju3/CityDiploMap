@@ -8,6 +8,7 @@ export const colors = {
   blue06: "#d6e0eb",
   blue07: "#ecf2fe",
   blue08: "#eef2f7",
+  cardBlue: "#CEE4EE",
 
   // gray
   gray01: "#121212",
