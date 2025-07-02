@@ -49,7 +49,7 @@ const Banner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [total]);
+  }, []);
 
   return (
     <s.BannerWrapper>

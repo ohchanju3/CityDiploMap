@@ -1,30 +1,38 @@
 export const dummyCountryTrends = [
   {
-    img: "/icons/sample.png",
-    title: "한-인도네시아 디지털 협력 회의",
-    content:
-      "이란에서 개혁 성향의 새 대통령이 당선되며 중동 외교 지형에 변화가 예고되고 있습니다. 서방과의 핵협상 재개 여부에 국제 사회의 이목이 쏠리고 있습니다.",
-
-    id: 3,
+    movement_data_id: 1,
+    nation: 840,
+    nation_name: "미국",
+    title_kr: "한미 외교장관 회담 개최",
+    content_kr:
+      "한미 양국은 최근 서울에서 외교장관 회담을 열고 전략적 동반자 관계 강화를 논의했습니다.",
+    pub_date: "2025-06-25T09:00:00Z",
   },
   {
-    title: "콜롬비아 문화 교류 행사",
-    content:
-      "서울에서 열린 콜롬비아 전통예술 전시회를 통해 양국 교류를 강화했습니다.",
-    id: 3,
+    movement_data_id: 2,
+    nation: 392,
+    nation_name: "일본",
+    title_kr: "한일 경제협력 포럼 개최",
+    content_kr:
+      "한일 간 경제협력 확대를 위한 포럼이 도쿄에서 개최되어 주요 경제계 인사가 참석했습니다.",
+    pub_date: "2025-06-28T14:00:00Z",
   },
   {
-    img: "/icons/sample.png",
-    title: "우즈베키스탄 청년 교류 프로그램",
-    content:
-      "양국 청년 간의 상호 이해를 높이기 위한 교류 프로그램이 시행되었습니다.",
-    id: 3,
+    movement_data_id: 3,
+    nation: 156,
+    nation_name: "중국",
+    title_kr: "한중 문화교류의 해 개막식",
+    content_kr:
+      "베이징에서 열린 개막식을 통해 양국은 문화예술 협력 확대를 다짐했습니다.",
+    pub_date: "2025-06-30T18:30:00Z",
   },
   {
-    img: "/icons/sample.png",
-    title: "우즈베키스탄 청년 교류 프로그램",
-    content:
-      "양국 청년 간의 상호 이해를 높이기 위한 교류 프로그램이 시행되었습니다.",
-    id: 3,
+    movement_data_id: 4,
+    nation: 276,
+    nation_name: "독일",
+    title_kr: "한독 청년 교류 프로그램 시작",
+    content_kr:
+      "한독 양국 청년 100명이 참여하는 문화교류 프로그램이 본격적으로 시작되었습니다.",
+    pub_date: "2025-07-01T10:00:00Z",
   },
 ];

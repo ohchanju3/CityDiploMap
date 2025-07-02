@@ -1,22 +1,21 @@
 import styled from "styled-components";
-import CountryTrendsCard, {
-  type CountryTrendsCardProps,
-} from "./CountryTrendsCard";
+import CountryTrendsCard from "./CountryTrendsCard";
+import type { TrendItem } from "@apis/main/getCountryTrends";
 
 interface CountryTrendsContainerProps {
-  data: CountryTrendsCardProps[];
+  data: TrendItem[];
 }
 
 const CountryTrendsContainer = ({ data }: CountryTrendsContainerProps) => {
   return (
     <CardGridWrapper>
-      {data.map((item, index) => (
+      {data.map((item) => (
         <CountryTrendsCard
-          key={index}
+          key={item.movement_data_id}
+          id={item.movement_data_id}
+          title={item.title_kr}
+          content={item.content_kr}
           img={item.img}
-          title={item.title}
-          content={item.content}
-          id={item.id}
         />
       ))}
     </CardGridWrapper>
