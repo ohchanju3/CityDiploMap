@@ -1,6 +1,5 @@
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Chip from "@components/ChipBadge";
 
 interface DiplomacyEventCardProps {
@@ -8,19 +7,17 @@ interface DiplomacyEventCardProps {
   id: number;
   category: string;
   content: string;
+  url?: string;
 }
 
 const DiplomacyEventCard = ({
   title,
   content,
-  id,
   category,
+  url,
 }: DiplomacyEventCardProps) => {
-  const navigate = useNavigate();
-
-  //TODO: 경로 수정 필요 ~~
   const handleClick = () => {
-    navigate(`/my/${id}`);
+    window.open(url, "_blank");
   };
 
   return (

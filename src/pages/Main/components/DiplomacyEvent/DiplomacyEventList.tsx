@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
@@ -8,12 +8,28 @@ interface CountryTrendCardListProps {
   data: EventItem[];
 }
 
-const ITEMS_PER_VIEW = 3;
-
 const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
 
-  const totalPages = Math.ceil(data.length / ITEMS_PER_VIEW);
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setItemsPerView(width < 1420 ? 2 : 3);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const totalPages = Math.ceil(data.length / itemsPerView);
+  const start = currentIndex * itemsPerView;
+  const end = start + itemsPerView;
+  const visibleData = data.slice(start, end);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
@@ -23,16 +39,18 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
     setCurrentIndex((prev) => Math.min(prev + 1, totalPages - 1));
   };
 
-  const start = currentIndex * ITEMS_PER_VIEW;
-  const end = start + ITEMS_PER_VIEW;
-  const visibleData = data.slice(start, end);
-
   return (
     <Wrapper>
       <CardTrack>
         {visibleData.map((item) => (
-          <CardWrapper key={item.id}>
-            <DiplomacyEventCard {...item} />
+          <CardWrapper key={item.event_id}>
+            <DiplomacyEventCard
+              id={item.event_id}
+              title={item.event_title}
+              content={item.event_content}
+              category={item.event_category}
+              url={item.url}
+            />
           </CardWrapper>
         ))}
       </CardTrack>
@@ -48,7 +66,6 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
           <img src="/icons/arrowLeft.svg" />
         </Arrow>
         <Arrow onClick={handleNext}>
-          {" "}
           <img src="/icons/arrowRight.svg" />
         </Arrow>
       </Pagination>
@@ -64,11 +81,10 @@ const Wrapper = styled.div`
 
 const CardTrack = styled.div`
   display: flex;
-  gap: 87px;
+  gap: 75px;
 `;
 
 const CardWrapper = styled.div`
-  flex: 1;
   min-width: 0;
 `;
 
