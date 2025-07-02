@@ -1,7 +1,7 @@
 import MainTitle from "@components/MainTitle";
 import styled from "styled-components";
 
-export interface CountryProps {
+interface CountryProps {
   country: string | null;
 }
 

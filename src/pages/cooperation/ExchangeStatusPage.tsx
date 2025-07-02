@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "@components/Button";
 import FilterContainer from "@components/Filters/FilterContainer";
@@ -7,6 +7,10 @@ import ExchangeStatusTabs from "./components/ExchangeStatusTabs";
 import CountryMap from "./components/country/CountryMap";
 import CountryCategory from "./components/country/CountryCategory";
 import { CITY_OPTIONS, COUNTRY_OPTIONS } from "@constants/filterOptions";
+import {
+  getCountryRatio,
+  type CategoryRatioData,
+} from "@apis/cooperation/getCountryRatio";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -14,10 +18,22 @@ const ExchangeStatusPage = () => {
   const [city, setCity] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [categoryData, setCategoryData] = useState<CategoryRatioData | null>(
+    null
+  );
+
   const handleSearchClick = () => {
     setIsSubmitted(true);
     alert(`${activeTab} API 호출`);
   };
+
+  useEffect(() => {
+    if (isSubmitted && country) {
+      getCountryRatio(country).then((data) => {
+        setCategoryData(data);
+      });
+    }
+  }, [isSubmitted, country]);
 
   return (
     <>
@@ -56,10 +72,10 @@ const ExchangeStatusPage = () => {
             ]}
           />
 
-          {isSubmitted && country && (
+          {isSubmitted && country && categoryData && (
             <>
               <CountryMap country={country} />
-              <CountryCategory country={country} />
+              <CountryCategory country={country} data={categoryData} />
             </>
           )}
         </>
