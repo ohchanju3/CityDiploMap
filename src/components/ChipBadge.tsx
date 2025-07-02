@@ -1,26 +1,50 @@
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
 
-const Chip = ({ text }: { text: string }) => {
+interface ChipProps {
+  text: string;
+  bgColor?: string;
+  textColor?: string;
+  borderRadius?: string;
+  padding?: string;
+}
+
+const Chip = ({
+  text,
+  bgColor,
+  textColor,
+  borderRadius,
+  padding,
+}: ChipProps) => {
   return (
-    <ChipWrapper>
+    <ChipWrapper
+      $bgColor={bgColor}
+      $textColor={textColor}
+      $borderRadius={borderRadius}
+      $padding={padding}
+    >
       <span>{text}</span>
     </ChipWrapper>
   );
 };
 
-const ChipWrapper = styled.section`
+const ChipWrapper = styled.section<{
+  $bgColor?: string;
+  $textColor?: string;
+  $borderRadius?: string;
+  $padding?: string;
+}>`
   display: inline-flex;
   width: fit-content;
   height: 1.5rem;
   justify-content: center;
   align-items: center;
-  padding: 0rem 0.5rem;
-  background-color: ${({ theme }) => theme.colors.blue07};
-  color: ${({ theme }) => theme.colors.blue02};
+  padding: ${({ $padding }) => $padding ?? "0rem 0.5rem"};
+  background-color: ${({ theme, $bgColor }) => $bgColor ?? theme.colors.blue07};
+  color: ${({ theme, $textColor }) => $textColor ?? theme.colors.blue02};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? "0.25rem"};
   ${fonts.cap16S}
   white-space: nowrap;
-  border-radius: 0.25rem;
 `;
 
 export default Chip;
