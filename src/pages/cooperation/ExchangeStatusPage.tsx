@@ -28,6 +28,11 @@ import {
   getCityRanking,
   type CityRankingData,
 } from "@apis/cooperation/getCityRanking";
+import CityExchangeCard from "./components/city/CityExchangeCard";
+import {
+  getCityCategory,
+  type CityCategoryData,
+} from "@apis/cooperation/getCityCategory";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -74,10 +79,14 @@ const ExchangeStatusPage = () => {
   const [cityRankingData, setCityRankingData] =
     useState<CityRankingData | null>(null);
 
+  const [cityCategoryData, setCityCategoryData] =
+    useState<CityCategoryData | null>(null);
+
   useEffect(() => {
     if (isSubmitted && city) {
       getCityRelations(city).then(setCityRelationData);
       getCityRanking(city).then(setCityRankingData);
+      getCityCategory(city).then(setCityCategoryData);
     }
   }, [isSubmitted, city]);
 
@@ -156,12 +165,17 @@ const ExchangeStatusPage = () => {
             ]}
           />
 
-          {isSubmitted && city && cityRelationData && cityRankingData && (
-            <>
-              <CityMap city={city} data={cityRelationData} />
-              <CityRanking city={city} data={cityRankingData} />
-            </>
-          )}
+          {isSubmitted &&
+            city &&
+            cityRelationData &&
+            cityRankingData &&
+            cityCategoryData && (
+              <>
+                <CityMap city={city} data={cityRelationData} />
+                <CityRanking city={city} data={cityRankingData} />
+                <CityExchangeCard city={city} data={cityCategoryData} />
+              </>
+            )}
         </>
       )}
     </>
