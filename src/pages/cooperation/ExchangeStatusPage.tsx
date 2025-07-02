@@ -23,6 +23,11 @@ import {
   getCityRelations,
   type CityRelationData,
 } from "@apis/cooperation/getCityRelation";
+import CityRanking from "./components/city/CityRanking";
+import {
+  getCityRanking,
+  type CityRankingData,
+} from "@apis/cooperation/getCityRanking";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
@@ -66,9 +71,13 @@ const ExchangeStatusPage = () => {
   const [cityRelationData, setCityRelationData] =
     useState<CityRelationData | null>(null);
 
+  const [cityRankingData, setCityRankingData] =
+    useState<CityRankingData | null>(null);
+
   useEffect(() => {
     if (isSubmitted && city) {
       getCityRelations(city).then(setCityRelationData);
+      getCityRanking(city).then(setCityRankingData);
     }
   }, [isSubmitted, city]);
 
@@ -147,9 +156,10 @@ const ExchangeStatusPage = () => {
             ]}
           />
 
-          {isSubmitted && city && cityRelationData && (
+          {isSubmitted && city && cityRelationData && cityRankingData && (
             <>
               <CityMap city={city} data={cityRelationData} />
+              <CityRanking city={city} data={cityRankingData} />
             </>
           )}
         </>
