@@ -24,7 +24,7 @@ const CountryTrendsCard = ({
 
   return (
     <CountryTrendsCardWrapper>
-      <img src={img} />
+      {img && <img src={img} />}
       <CountryTrendsCardTextContainer>
         <CountryTrendCardText>
           <h1>{title}</h1>

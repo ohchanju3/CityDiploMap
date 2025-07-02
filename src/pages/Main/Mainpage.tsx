@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fonts } from "@styles/fonts";
 import CountryTrendsContainer from "./components/CountryTrends/CountryTrendsContainer";
-import {
-  fetchTrendsByCountry,
-  type TrendItem,
-} from "@apis/main/getCountryTrends";
+import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
 import DiplomacyEventList from "./components/DiplomacyEvent/DiplomacyEventList";
 import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +25,7 @@ const Mainpage = () => {
 
   useEffect(() => {
     const loadTrends = async () => {
-      const data = await fetchTrendsByCountry(selectedCountry);
+      const data = await getTrendCountry(selectedCountry);
       setTrendsData(data);
     };
 

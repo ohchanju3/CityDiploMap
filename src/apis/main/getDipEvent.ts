@@ -14,7 +14,7 @@ export interface EventItem {
 export type EventData = EventItem[];
 
 export const getDipEvent = async (): Promise<EventData> => {
-  const url = `/api/diplomancy`;
+  const url = `/api/diplomacy`;
 
   const res = await getResponse<EventData[]>(url);
 
