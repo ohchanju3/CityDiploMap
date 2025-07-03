@@ -18,6 +18,8 @@ import {
   getExchangeProposal,
   type ProposalData,
 } from "@apis/recommend/getExchangeProposal";
+import RecommendSummary from "./components/RecommendSummary";
+import { getSummary, type SummaryData } from "@apis/recommend/getSummary";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -67,6 +69,7 @@ const RecommendPage = () => {
     null
   );
   const [proposalData, setProposalData] = useState<ProposalData | null>(null);
+  const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
 
   useEffect(() => {
     if (isSubmitted && isAllSelected) {
@@ -74,6 +77,7 @@ const RecommendPage = () => {
         setStrategyData
       );
       getExchangeProposal().then(setProposalData);
+      getSummary().then(setSummaryData);
     }
   }, [isSubmitted, city]);
 
@@ -92,12 +96,21 @@ const RecommendPage = () => {
         }
       />
       <FilterContainer filters={filters} />;
-      {isAllSelected && isSubmitted && strategyData && proposalData && (
-        <>
-          <ExchangeStrategy city={city} country={country} data={strategyData} />
-          <ExchangeProposal data={proposalData} />
-        </>
-      )}
+      {isAllSelected &&
+        isSubmitted &&
+        strategyData &&
+        proposalData &&
+        summaryData && (
+          <>
+            <ExchangeStrategy
+              city={city}
+              country={country}
+              data={strategyData}
+            />
+            <ExchangeProposal data={proposalData} />
+            <RecommendSummary data={summaryData} />
+          </>
+        )}
     </>
   );
 };
