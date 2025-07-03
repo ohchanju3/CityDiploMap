@@ -13,6 +13,11 @@ import {
   getExchangeStrategy,
   type ExchangeStrategyData,
 } from "@apis/recommend/getExchangeStrategy";
+import ExchangeProposal from "./components/ExchangeProposal";
+import {
+  getExchangeProposal,
+  type ProposalData,
+} from "@apis/recommend/getExchangeProposal";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -61,12 +66,14 @@ const RecommendPage = () => {
   const [strategyData, setStrategyData] = useState<ExchangeStrategyData | null>(
     null
   );
+  const [proposalData, setProposalData] = useState<ProposalData | null>(null);
 
   useEffect(() => {
     if (isSubmitted && isAllSelected) {
       getExchangeStrategy(city, country, category, purpose).then(
         setStrategyData
       );
+      getExchangeProposal().then(setProposalData);
     }
   }, [isSubmitted, city]);
 
@@ -85,8 +92,11 @@ const RecommendPage = () => {
         }
       />
       <FilterContainer filters={filters} />;
-      {isAllSelected && isSubmitted && strategyData && (
-        <ExchangeStrategy city={city} country={country} data={strategyData} />
+      {isAllSelected && isSubmitted && strategyData && proposalData && (
+        <>
+          <ExchangeStrategy city={city} country={country} data={strategyData} />
+          <ExchangeProposal data={proposalData} />
+        </>
       )}
     </>
   );

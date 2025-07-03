@@ -1,0 +1,23 @@
+import type { ProposalData } from "@apis/recommend/getExchangeProposal";
+import MainTitle from "@components/MainTitle";
+import DiplomacyEventList from "@pages/Main/components/DiplomacyEvent/DiplomacyEventList";
+
+interface ProposalProps {
+  data: ProposalData;
+}
+
+const ExchangeProposal = ({ data }: ProposalProps) => {
+  return (
+    <>
+      <MainTitle
+        title="교류 협력 사업 제안"
+        subtitle="교류 전략 수립을 위한 분석 자료와 인사이트를 요약해 안내해드려요."
+        type="contentTitle"
+        marginTop="7.81rem"
+      />
+      <DiplomacyEventList data={data} />
+    </>
+  );
+};
+
+export default ExchangeProposal;

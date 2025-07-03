@@ -27,7 +27,7 @@ const DiplomacyEventCard = ({
         <h1>{title}</h1>
         <p>{content}</p>
       </DiplomacyEventCardTextContainer>
-      <Move onClick={handleClick}>{"바로가기 ->"}</Move>
+      {url && <Move onClick={handleClick}>{"바로가기 ->"}</Move>}
     </DiplomacyEventCardWrapper>
   );
 };
