@@ -1,21 +1,31 @@
 import Button from "src/components/Button";
 import FilterContainer from "src/components/Filters/FilterContainer";
 import MainTitle from "src/components/MainTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CATEGORY_OPTIONS,
   CITY_OPTIONS,
   COUNTRY_OPTIONS,
   PURPOSE_OPTIONS,
 } from "@constants/filterOptions";
+import ExchangeStrategy from "./components/ExchangeStrategy";
+import {
+  getExchangeStrategy,
+  type ExchangeStrategyData,
+} from "@apis/recommend/getExchangeStrategy";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
   const [city, setCity] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [purpose, setPurpose] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isAllSelected = country && city && category && purpose;
+
+  const handleSearchClick = () => {
+    setIsSubmitted(true);
+  };
 
   const filters = [
     {
@@ -48,6 +58,18 @@ const RecommendPage = () => {
     },
   ];
 
+  const [strategyData, setStrategyData] = useState<ExchangeStrategyData | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (isSubmitted && isAllSelected) {
+      getExchangeStrategy(city, country, category, purpose).then(
+        setStrategyData
+      );
+    }
+  }, [isSubmitted, city]);
+
   return (
     <>
       <MainTitle
@@ -57,12 +79,15 @@ const RecommendPage = () => {
           <Button
             text="조회하기"
             img="/icons/arrowUpRight.svg"
-            onClick={() => alert("api 세팅 필요")}
+            onClick={handleSearchClick}
             disabled={!isAllSelected}
           />
         }
       />
       <FilterContainer filters={filters} />;
+      {isAllSelected && isSubmitted && strategyData && (
+        <ExchangeStrategy city={city} country={country} data={strategyData} />
+      )}
     </>
   );
 };
