@@ -1,8 +1,21 @@
+import CitizenEvents from "./components/CitizenEvents";
+import CitizenOpinion from "./components/CitizenOpinion";
+
+const CITY_LIST = [
+  "전체",
+  "경기도",
+  "부산광역시",
+  "서울특별시",
+  "인천광역시",
+  "제주특별자치도",
+];
+
 const PublicDiplomacyPage = () => {
   return (
     <>
-      <p>시민 외교 참여 페이지</p>
-      <p>이제 채워야 함 ㅜ</p>
+      <img src="/images/main/banner3.svg" />
+      <CitizenEvents labelList={CITY_LIST} />
+      <CitizenOpinion labelList={CITY_LIST} />
     </>
   );
 };

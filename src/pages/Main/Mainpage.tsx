@@ -8,6 +8,7 @@ import { getDipEvent, type EventItem } from "@apis/main/getDipEvent";
 import { useNavigate } from "react-router-dom";
 import Banner from "./components/banners/Banner";
 import MainTitle from "@components/MainTitle";
+import TabSelector from "@components/TabSelector";
 
 const COUNTRY_LIST = [
   "전체",
@@ -52,17 +53,11 @@ const Mainpage = () => {
     <>
       <Banner />
       <MainTitle title="국가별 최신 동향" marginTop="5rem" />
-      <CountryTabWrapper>
-        {COUNTRY_LIST.map((country) => (
-          <CountryTab
-            key={country}
-            $isActive={selectedCountry === country}
-            onClick={() => setSelectedCountry(country)}
-          >
-            {country}
-          </CountryTab>
-        ))}
-      </CountryTabWrapper>
+      <TabSelector
+        labelList={COUNTRY_LIST}
+        selectedLabel={selectedCountry}
+        onSelect={setSelectedCountry}
+      />
       <CountryTrendsContainer data={trendsData} />
 
       <MainTitle
@@ -81,29 +76,6 @@ const Mainpage = () => {
     </>
   );
 };
-
-const CountryTabWrapper = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.88rem;
-  margin-top: 2.81rem;
-`;
-
-const CountryTab = styled.section<{ $isActive: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0rem 0.25rem;
-  height: 2.5rem;
-  min-width: 3.5rem;
-  border-bottom: 3px solid
-    ${({ $isActive, theme }) =>
-      $isActive ? theme.colors.blue01 : "transparent"};
-  color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.blue01 : theme.colors.gray02};
-  cursor: pointer;
-  ${fonts.body18S}
-`;
 
 const RightBtnWrapper = styled.section`
   display: flex;

@@ -9,6 +9,8 @@ interface ExchangeCaseCardProps {
   img?: string;
   bgColor?: string;
   useCategoryMap?: boolean;
+  summaryType?: boolean;
+  onClick?: () => void;
 }
 
 const ExchangeCaseCard = ({
@@ -18,6 +20,8 @@ const ExchangeCaseCard = ({
   img,
   bgColor,
   useCategoryMap = true,
+  summaryType = false,
+  onClick,
 }: ExchangeCaseCardProps) => {
   const {
     label,
@@ -36,7 +40,10 @@ const ExchangeCaseCard = ({
       <ExchangeCaseCardTextContainer>
         <Chip text={label} />
         {title && <h1>{title}</h1>}
-        <p>{content}</p>
+        <ContentText $summary={summaryType ?? false}>{content}</ContentText>
+        {summaryType && (
+          <MoreInfo onClick={onClick}>{"자세히 보기 ->"}</MoreInfo>
+        )}
       </ExchangeCaseCardTextContainer>
     </ExchangeCaseCardWrapper>
   );
@@ -48,6 +55,12 @@ const ExchangeCaseCardWrapper = styled.div`
   width: 24rem;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
+
+  span {
+    ${fonts.body18M};
+    color: ${({ theme }) => theme.colors.gray02};
+    cursor: pointer;
+  }
 `;
 
 const ExchangeCaseCardImgContainer = styled.section<{ $bgColor: string }>`
@@ -74,12 +87,29 @@ const ExchangeCaseCardTextContainer = styled.section`
     color: ${({ theme }) => theme.colors.gray01};
     ${fonts.body20B};
   }
-
-  p {
-    color: ${({ theme }) => theme.colors.gray03};
-    ${fonts.body18M};
-    white-space: pre-line;
-  }
 `;
 
+const ContentText = styled.p<{ $summary: boolean }>`
+  color: ${({ theme }) => theme.colors.gray03};
+  ${fonts.body18M};
+  white-space: pre-line;
+
+  ${({ $summary }) =>
+    $summary &&
+    `
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  `}
+`;
+
+const MoreInfo = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  ${fonts.cap16M};
+  color: ${({ theme }) => theme.colors.gray02};
+`;
 export default ExchangeCaseCard;

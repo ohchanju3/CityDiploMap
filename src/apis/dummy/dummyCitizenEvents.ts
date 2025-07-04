@@ -1,0 +1,38 @@
+export const dummyCitizenEvents = [
+  {
+    program_id: 4,
+    local: 1,
+    local_name: "서울특별시",
+    program_name: "행사 그만 추가할래",
+    program_content: "ㅎㅎㅎㅎ",
+    url: "https://www.naver.com/",
+    created_at: "2025-07-01T03:12:01.907207",
+  },
+  {
+    program_id: 3,
+    local: 1,
+    local_name: "서울특별시",
+    program_name: "행사를 계속 추가해봅시다!!",
+    program_content: "행사내용입니다",
+    url: "https://www.naver.com/",
+    created_at: "2025-07-01T03:11:49.333342",
+  },
+  {
+    program_id: 2,
+    local: 2,
+    local_name: "부산광역시",
+    program_name: "다른 행사2",
+    program_content: "다른 생하2 내요임",
+    url: "https://www.naver.com/",
+    created_at: "2025-07-01T03:10:52.189782",
+  },
+  {
+    program_id: 1,
+    local: 1,
+    local_name: "서울특별시",
+    program_name: "행사입니다",
+    program_content: "행사내용은 다음과 같아요",
+    url: "https://www.naver.com/",
+    created_at: "2025-07-01T03:10:37.059073",
+  },
+];

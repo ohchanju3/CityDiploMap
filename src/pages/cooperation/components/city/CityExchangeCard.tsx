@@ -15,7 +15,7 @@ const CityExchangeCard = ({ city, data }: Props) => {
     <>
       <MainTitle
         title={`${city}의 주요 교류 분야를 확인해보세요!`}
-        subtitle={`${city}가 교류협력 사업에서 중점적으로 추진하는 3대 분야를 확인할 수 있어요.`}
+        subtitle={`교류협력 4대 분야 중 ${city}가 중점적으로 추진하고 있는 주요 3개 분야를 확인할 수 있어요.`}
         type="contentTitle"
         marginTop="9.38rem"
       />
