@@ -1,4 +1,3 @@
-// components/common/RegionTabSelector.tsx
 import styled from "styled-components";
 import { fonts } from "@styles/fonts";
 
