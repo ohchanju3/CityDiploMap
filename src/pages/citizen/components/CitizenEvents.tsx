@@ -80,6 +80,10 @@ const CitizenEvents = ({ labelList }: CitizenEventsProps) => {
             }.png`}
             bgColor="#DFE8F4"
             useCategoryMap={false}
+            summaryType={!!item.url}
+            onClick={
+              item.url ? () => window.open(item.url, "_blank") : undefined
+            }
           />
         ))}
       </EventsCardList>

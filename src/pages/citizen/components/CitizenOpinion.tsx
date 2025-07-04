@@ -136,7 +136,7 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
             onClose={() => setIsModalOpen(false)}
             onSubmitSuccess={() => {
               refreshOpinions();
-              setIsModalOpen(false); // 모달 닫기까지 같이 처리
+              setIsModalOpen(false);
             }}
           />
         </ModalOverlay>
