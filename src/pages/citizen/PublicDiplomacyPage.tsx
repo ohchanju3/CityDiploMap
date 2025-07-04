@@ -1,4 +1,5 @@
 import CitizenEvents from "./components/CitizenEvents";
+import CitizenOpinion from "./components/CitizenOpinion";
 
 const CITY_LIST = [
   "전체",
@@ -14,6 +15,7 @@ const PublicDiplomacyPage = () => {
     <>
       <img src="/images/main/banner3.svg" />
       <CitizenEvents labelList={CITY_LIST} />
+      <CitizenOpinion labelList={CITY_LIST} />
     </>
   );
 };
