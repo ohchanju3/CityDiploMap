@@ -25,6 +25,8 @@ import {
   getCountryInfo,
   type CountryInfoData,
 } from "@apis/recommend/getCountryInfo";
+import ExchangeRecent from "./components/ExchangeRecent";
+import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -77,6 +79,7 @@ const RecommendPage = () => {
   const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
   const [countryInfoData, setCountryInfoData] =
     useState<CountryInfoData | null>(null);
+  const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
 
   useEffect(() => {
     if (isSubmitted && isAllSelected) {
@@ -86,6 +89,7 @@ const RecommendPage = () => {
       getExchangeProposal().then(setProposalData);
       getSummary().then(setSummaryData);
       getCountryInfo(country).then(setCountryInfoData);
+      getTrendCountry(country).then(setTrendsData);
     }
   }, [isSubmitted, city]);
 
@@ -122,6 +126,7 @@ const RecommendPage = () => {
               country={country}
               content={countryInfoData.nation_info}
             />
+            <ExchangeRecent country={country} data={trendsData} />
           </>
         )}
     </>

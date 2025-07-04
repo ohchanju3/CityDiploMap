@@ -4,9 +4,13 @@ import type { TrendItem } from "@apis/main/getCountryTrends";
 
 interface CountryTrendsContainerProps {
   data: TrendItem[];
+  type?: "summary" | "info";
 }
 
-const CountryTrendsContainer = ({ data }: CountryTrendsContainerProps) => {
+const CountryTrendsContainer = ({
+  data,
+  type = "summary",
+}: CountryTrendsContainerProps) => {
   return (
     <CardGridWrapper>
       {data.map((item) => (
@@ -16,6 +20,7 @@ const CountryTrendsContainer = ({ data }: CountryTrendsContainerProps) => {
           title={item.title_kr}
           content={item.content_kr}
           img={item.img}
+          type={type}
         />
       ))}
     </CardGridWrapper>

@@ -12,7 +12,11 @@ const ExchangeInfo = ({ country, content }: InfoProps) => {
 
   return (
     <>
-      <MainTitle title={`${country} 기본 정보`} marginTop="9.06rem" />
+      <MainTitle
+        title={`${country} 기본 정보`}
+        marginTop="9.06rem"
+        type="contentTitle"
+      />
       <div style={{ marginTop: "2.81rem" }}>
         <SummaryItem
           title={country}

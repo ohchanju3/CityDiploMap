@@ -7,6 +7,7 @@ export interface CountryTrendsCardProps {
   title: string;
   content: string;
   id?: number;
+  type?: "summary" | "info";
 }
 
 const CountryTrendsCard = ({
@@ -14,23 +15,24 @@ const CountryTrendsCard = ({
   title,
   content,
   id,
+  type = "summary",
 }: CountryTrendsCardProps) => {
   const navigate = useNavigate();
+  const isSummary = type === "summary";
 
-  //TODO: 경로 수정 필요 ~~
   const handleClick = () => {
-    navigate(`/my/${id}`);
+    if (isSummary) navigate(`/my/${id}`);
   };
 
   return (
     <CountryTrendsCardWrapper>
-      {img && <img src={img} />}
+      {img && <img src={img} alt={title} />}
       <CountryTrendsCardTextContainer>
-        <CountryTrendCardText>
+        <CountryTrendCardText $clipped={isSummary}>
           <h1>{title}</h1>
           <p>{content}</p>
         </CountryTrendCardText>
-        <span onClick={handleClick}>{"자세히 보기 ->"}</span>
+        {isSummary && <span onClick={handleClick}>{"자세히 보기 ->"}</span>}
       </CountryTrendsCardTextContainer>
     </CountryTrendsCardWrapper>
   );
@@ -69,26 +71,30 @@ const CountryTrendsCardTextContainer = styled.section`
   }
 `;
 
-const CountryTrendCardText = styled.section`
-  gap: 0.75rem;
+const CountryTrendCardText = styled.section<{ $clipped: boolean }>`
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
 
   h1 {
-    text-overflow: ellipsis;
     ${fonts.body20B};
     color: ${({ theme }) => theme.colors.gray01};
+    text-overflow: ellipsis;
   }
 
   p {
     ${fonts.body18M};
     color: ${({ theme }) => theme.colors.gray03};
     white-space: pre-line;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    ${({ $clipped }) =>
+      $clipped &&
+      `
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      `}
   }
 `;
 
