@@ -104,6 +104,11 @@ const OpinionModalWrapper = styled.div`
   border-radius: 12px;
   z-index: 99;
   position: relative;
+
+  @media (max-width: 1470px) {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
 `;
 
 const Title = styled.h1`
@@ -119,6 +124,10 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 const CityChoice = styled.div`
