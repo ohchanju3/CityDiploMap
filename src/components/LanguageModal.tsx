@@ -18,12 +18,16 @@ const LanguageModal: React.FC<LanguageModalProps> = ({
       <Button
         onClick={() => onSelectLanguage("ko")}
         selected={currentLanguage === "ko"}
+        className="notranslate"
+        translate="no"
       >
         한국어
       </Button>
       <Button
         onClick={() => onSelectLanguage("en")}
         selected={currentLanguage === "en"}
+        className="notranslate"
+        translate="no"
       >
         English (영어)
       </Button>
@@ -47,6 +51,7 @@ const ModalWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   background: white;
   width: 176px;
+  z-index: 100;
 
   &::after {
     content: "";
