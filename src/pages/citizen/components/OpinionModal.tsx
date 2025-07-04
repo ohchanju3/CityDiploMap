@@ -42,9 +42,9 @@ const OpinionModal = ({
     const result = await postOpinion(payload);
 
     if (result === null) {
-      alert("제출에 실패했습니다. 다시 시도해주세요.");
+      alert("다시 시도해주세요 :(");
     } else {
-      alert("의견이 성공적으로 제출되었습니다!");
+      alert("등록 완료되었습니다");
       onSubmitSuccess();
     }
   };

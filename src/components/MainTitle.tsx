@@ -51,7 +51,8 @@ const MainTitleWrapper = styled.section<{
     ${fonts.body20S}
     ${({ $type }) =>
       $type === "contentTitle" ? fonts.subtitle24B : fonts.body20S};
-    color: ${({ theme }) => theme.colors.gray04};
+    color: ${({ theme, $type }) =>
+      $type === "contentTitle" ? theme.colors.gray03 : theme.colors.gray04};
   }
 `;
 
