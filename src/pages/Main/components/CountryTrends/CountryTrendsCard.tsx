@@ -14,14 +14,14 @@ const CountryTrendsCard = ({
   img,
   title,
   content,
-  id,
+  // id,
   type = "summary",
 }: CountryTrendsCardProps) => {
   const navigate = useNavigate();
   const isSummary = type === "summary";
 
   const handleClick = () => {
-    if (isSummary) navigate(`/my/${id}`);
+    if (isSummary) navigate(`/recommend`);
   };
 
   return (

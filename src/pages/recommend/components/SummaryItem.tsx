@@ -22,7 +22,7 @@ const SummaryItem = ({
   withImageBg = false,
 }: SummaryItemProps) => {
   return (
-    <BlockWrapper>
+    <BlockWrapper $withImageBg={withImageBg}>
       <SummaryImg $bg={bgColor}>
         {withImageBg ? (
           <SummaryImgBg>
@@ -52,11 +52,12 @@ const SummaryItem = ({
 
 export default SummaryItem;
 
-const BlockWrapper = styled.section`
+const BlockWrapper = styled.section<{ $withImageBg: boolean }>`
   display: flex;
   gap: 2.81rem;
   padding-bottom: 2.81rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray05};
+  ${({ $withImageBg, theme }) =>
+    !$withImageBg && `border-bottom: 1px solid ${theme.colors.gray05};`}
 `;
 
 const SummaryImgBg = styled.section`
