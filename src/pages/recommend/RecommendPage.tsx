@@ -1,21 +1,47 @@
 import Button from "src/components/Button";
 import FilterContainer from "src/components/Filters/FilterContainer";
 import MainTitle from "src/components/MainTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CATEGORY_OPTIONS,
   CITY_OPTIONS,
   COUNTRY_OPTIONS,
   PURPOSE_OPTIONS,
 } from "@constants/filterOptions";
+import ExchangeStrategy from "./components/ExchangeStrategy";
+import {
+  getExchangeStrategy,
+  type ExchangeStrategyData,
+} from "@apis/recommend/getExchangeStrategy";
+import ExchangeProposal from "./components/ExchangeProposal";
+import {
+  getExchangeProposal,
+  type ProposalData,
+} from "@apis/recommend/getExchangeProposal";
+import RecommendSummary from "./components/RecommendSummary";
+import { getSummary, type SummaryData } from "@apis/recommend/getSummary";
+import ExchangeInfo from "./components/ExchangeInfo";
+import {
+  getCountryInfo,
+  type CountryInfoItem,
+} from "@apis/recommend/getCountryInfo";
+import ExchangeRecent from "./components/ExchangeRecent";
+import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
+import ExchangeEnvIssue from "./components/ExchangeEnvIssue";
+import { getEnvIssue, type EnvIssueItem } from "@apis/recommend/getEnvIssue";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
   const [city, setCity] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [purpose, setPurpose] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isAllSelected = country && city && category && purpose;
+
+  const handleSearchClick = () => {
+    setIsSubmitted(true);
+  };
 
   const filters = [
     {
@@ -48,6 +74,29 @@ const RecommendPage = () => {
     },
   ];
 
+  const [strategyData, setStrategyData] = useState<ExchangeStrategyData | null>(
+    null
+  );
+  const [proposalData, setProposalData] = useState<ProposalData | null>(null);
+  const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
+  const [countryInfoData, setCountryInfoData] =
+    useState<CountryInfoItem | null>(null);
+  const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
+  const [envIssueData, setEnvIssueData] = useState<EnvIssueItem[]>([]);
+
+  useEffect(() => {
+    if (isSubmitted && isAllSelected) {
+      getExchangeStrategy(city, country, category, purpose).then(
+        setStrategyData
+      );
+      getExchangeProposal().then(setProposalData);
+      getSummary().then(setSummaryData);
+      getCountryInfo(country).then(setCountryInfoData);
+      getTrendCountry(country).then(setTrendsData);
+      getEnvIssue(country).then(setEnvIssueData);
+    }
+  }, [isSubmitted, city]);
+
   return (
     <>
       <MainTitle
@@ -57,12 +106,31 @@ const RecommendPage = () => {
           <Button
             text="조회하기"
             img="/icons/arrowUpRight.svg"
-            onClick={() => alert("api 세팅 필요")}
+            onClick={handleSearchClick}
             disabled={!isAllSelected}
           />
         }
       />
       <FilterContainer filters={filters} />;
+      {isAllSelected &&
+        isSubmitted &&
+        strategyData &&
+        proposalData &&
+        summaryData &&
+        countryInfoData && (
+          <>
+            <ExchangeStrategy
+              city={city}
+              country={country}
+              data={strategyData}
+            />
+            <ExchangeProposal data={proposalData} />
+            <RecommendSummary data={summaryData} />
+            <ExchangeInfo country={country} data={countryInfoData} />
+            <ExchangeRecent country={country} data={trendsData} />
+            <ExchangeEnvIssue country={country} data={envIssueData} />
+          </>
+        )}
     </>
   );
 };

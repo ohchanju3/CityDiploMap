@@ -2,7 +2,7 @@ import MainTitle from "@components/MainTitle";
 import ExchangeCaseCard from "../country/ExchangeCaseCard";
 import styled from "styled-components";
 import type { CityVisionItem } from "@apis/cooperation/getCityVision";
-import { cityNameToEn } from "@utils/cityNameToEn";
+import { cityNameToEn } from "@utils/nameToEn";
 
 interface Props {
   city: string;

@@ -36,7 +36,7 @@ const ChipWrapper = styled.section<{
 }>`
   display: inline-flex;
   width: fit-content;
-  height: 1.5rem;
+  /* height: 1.5rem; */
   justify-content: center;
   align-items: center;
   padding: ${({ $padding }) => $padding ?? "0rem 0.5rem"};
