@@ -9,6 +9,17 @@ const PublicDiplomacyPage = () => {
         subtitle="외교부 및 관계기관과 지자체에서 주최하는 프로그램 정보를 확인할 수 있어요."
         marginTop="6.25rem"
       />
+      <CityTabWrapper>
+        {CITY_LIST.map((city) => (
+          <CityTab
+            key={city}
+            $isActive={selectedCity === city}
+            onClick={() => setSelectedCity(city)}
+          >
+            {country}
+          </CityTab>
+        ))}
+      </CityTabWrapper>
     </>
   );
 };
