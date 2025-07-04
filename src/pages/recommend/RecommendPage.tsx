@@ -23,11 +23,12 @@ import { getSummary, type SummaryData } from "@apis/recommend/getSummary";
 import ExchangeInfo from "./components/ExchangeInfo";
 import {
   getCountryInfo,
-  type CountryInfoData,
+  type CountryInfoItem,
 } from "@apis/recommend/getCountryInfo";
 import ExchangeRecent from "./components/ExchangeRecent";
 import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
 import ExchangeEnvIssue from "./components/ExchangeEnvIssue";
+import { getEnvIssue, type EnvIssueItem } from "@apis/recommend/getEnvIssue";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -78,8 +79,10 @@ const RecommendPage = () => {
   );
   const [proposalData, setProposalData] = useState<ProposalData | null>(null);
   const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
-  const [countryInfoData, setCountryInfoData] = useState<CountryInfoData[]>([]);
+  const [countryInfoData, setCountryInfoData] =
+    useState<CountryInfoItem | null>(null);
   const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
+  const [envIssueData, setEnvIssueData] = useState<EnvIssueItem[]>([]);
 
   useEffect(() => {
     if (isSubmitted && isAllSelected) {
@@ -90,6 +93,7 @@ const RecommendPage = () => {
       getSummary().then(setSummaryData);
       getCountryInfo(country).then(setCountryInfoData);
       getTrendCountry(country).then(setTrendsData);
+      getEnvIssue(country).then(setEnvIssueData);
     }
   }, [isSubmitted, city]);
 
@@ -124,7 +128,7 @@ const RecommendPage = () => {
             <RecommendSummary data={summaryData} />
             <ExchangeInfo country={country} data={countryInfoData} />
             <ExchangeRecent country={country} data={trendsData} />
-            <ExchangeEnvIssue country={country} />
+            <ExchangeEnvIssue country={country} data={envIssueData} />
           </>
         )}
     </>

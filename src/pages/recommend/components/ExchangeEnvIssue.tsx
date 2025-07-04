@@ -1,12 +1,15 @@
 import MainTitle from "@components/MainTitle";
 import { fonts } from "@styles/fonts";
 import styled from "styled-components";
+import EnvIssueCardList from "./EnvIssueCardList";
+import type { EnvIssueItem } from "@apis/recommend/getEnvIssue";
 
 interface EnvIssueProps {
   country: string;
+  data: EnvIssueItem[];
 }
 
-const ExchangeEnvIssue = ({ country }: EnvIssueProps) => {
+const ExchangeEnvIssue = ({ country, data }: EnvIssueProps) => {
   return (
     <>
       <MainTitle
@@ -27,6 +30,7 @@ const ExchangeEnvIssue = ({ country }: EnvIssueProps) => {
             <img src="/images/recommend/envTitle.png" />
           </EnvTitleImgContainer>
         </EnvTitleContainer>
+        <EnvIssueCardList data={data} />
       </EnvWrapper>
     </>
   );
@@ -36,6 +40,8 @@ const EnvWrapper = styled.div`
   width: 100%;
   display: flex;
   margin-top: 2.81rem;
+  gap: 3rem;
+  align-items: center;
 `;
 
 const EnvTitleContainer = styled.div`
