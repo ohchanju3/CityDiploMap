@@ -27,6 +27,7 @@ import {
 } from "@apis/recommend/getCountryInfo";
 import ExchangeRecent from "./components/ExchangeRecent";
 import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
+import ExchangeEnvIssue from "./components/ExchangeEnvIssue";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -77,8 +78,7 @@ const RecommendPage = () => {
   );
   const [proposalData, setProposalData] = useState<ProposalData | null>(null);
   const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
-  const [countryInfoData, setCountryInfoData] =
-    useState<CountryInfoData | null>(null);
+  const [countryInfoData, setCountryInfoData] = useState<CountryInfoData[]>([]);
   const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
 
   useEffect(() => {
@@ -122,11 +122,9 @@ const RecommendPage = () => {
             />
             <ExchangeProposal data={proposalData} />
             <RecommendSummary data={summaryData} />
-            <ExchangeInfo
-              country={country}
-              content={countryInfoData.nation_info}
-            />
+            <ExchangeInfo country={country} data={countryInfoData} />
             <ExchangeRecent country={country} data={trendsData} />
+            <ExchangeEnvIssue country={country} />
           </>
         )}
     </>

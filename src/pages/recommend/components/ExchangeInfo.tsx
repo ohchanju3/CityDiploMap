@@ -1,13 +1,14 @@
 import MainTitle from "@components/MainTitle";
 import SummaryItem from "./SummaryItem";
 import { CountryNameToEn } from "@utils/nameToEn";
+import type { CountryInfoData } from "@apis/recommend/getCountryInfo";
 
 interface InfoProps {
   country: string;
-  content: string;
+  data: CountryInfoData[];
 }
 
-const ExchangeInfo = ({ country, content }: InfoProps) => {
+const ExchangeInfo = ({ country, data }: InfoProps) => {
   const imageName = CountryNameToEn[country];
 
   return (
@@ -21,7 +22,7 @@ const ExchangeInfo = ({ country, content }: InfoProps) => {
         <SummaryItem
           title={country}
           image={`/images/flag/${imageName}.png`}
-          content={content}
+          content={data[0].nation_info}
           bgColor="blue07"
           imgSize={{ width: "3.9rem", height: "2.9rem" }}
           withImageBg={true}
