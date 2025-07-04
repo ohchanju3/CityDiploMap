@@ -66,6 +66,13 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
     };
   }, [isModalOpen]);
 
+  const refreshOpinions = () => {
+    getCitizenOpinion(selectedCity).then((data) => {
+      setOpinionData(data);
+      setCurrentPage(1);
+    });
+  };
+
   return (
     <>
       <MainTitle
@@ -102,7 +109,7 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
       <Pagination>
         {startPage > 1 && (
           <Arrow onClick={() => handlePageChange(startPage - 1)}>
-            <img src="/icons/arrowLeft.svg" alt="Previous Group" />
+            <img src="/icons/arrowLeft.svg" />
           </Arrow>
         )}
 
@@ -118,14 +125,20 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
 
         {endPage < totalPages && (
           <Arrow onClick={() => handlePageChange(endPage + 1)}>
-            <img src="/icons/arrowRight.svg" alt="Next Group" />
+            <img src="/icons/arrowRight.svg" />
           </Arrow>
         )}
       </Pagination>
 
       {isModalOpen && (
         <ModalOverlay>
-          <OpinionModal />
+          <OpinionModal
+            onClose={() => setIsModalOpen(false)}
+            onSubmitSuccess={() => {
+              refreshOpinions();
+              setIsModalOpen(false); // 모달 닫기까지 같이 처리
+            }}
+          />
         </ModalOverlay>
       )}
     </>

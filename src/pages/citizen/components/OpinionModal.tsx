@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { fonts } from "@styles/fonts";
 import FilterItem from "@components/Filters/FilterItem";
 import Button from "@components/Button";
+import { postOpinion } from "@apis/citizen/postOpinion";
 
 const CITY_LIST = [
   "전체",
@@ -13,23 +14,45 @@ const CITY_LIST = [
   "제주특별자치도",
 ];
 
-const OpinionModal = () => {
+const OpinionModal = ({
+  onClose,
+  onSubmitSuccess,
+}: {
+  onClose: () => void;
+  onSubmitSuccess: () => void;
+}) => {
   const [selectedCity, setSelectedCity] = useState<string>("전체");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
   const isAllSelected = title.trim() !== "" && content.trim() !== "";
 
-  const handleSubmit = () => {
-    if (!isAllSelected) return;
+  const getCityId = (city: string): number => {
+    const id = CITY_LIST.indexOf(city);
+    return id;
+  };
 
-    alert("제출 완료!");
+  const handleSubmit = async () => {
+    const payload = {
+      local: getCityId(selectedCity),
+      title,
+      content,
+    };
+
+    const result = await postOpinion(payload);
+
+    if (result === null) {
+      alert("제출에 실패했습니다. 다시 시도해주세요.");
+    } else {
+      alert("의견이 성공적으로 제출되었습니다!");
+      onSubmitSuccess();
+    }
   };
 
   return (
     <OpinionModalWrapper>
       <Header>
-        <img src="/icons/close.svg" />
+        <img src="/icons/close.svg" onClick={onClose} />
       </Header>
       <Title>공공외교에 대한 여러분의 생각을 남겨주세요</Title>
       <CityChoice>
@@ -119,6 +142,7 @@ const TitleInput = styled.input`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   color: ${({ theme }) => theme.colors.gray03};
+  background-color: ${({ theme }) => theme.colors.gray07};
   ${fonts.body20M};
 
   &::placeholder {

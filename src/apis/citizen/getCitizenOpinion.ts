@@ -20,7 +20,7 @@ export const getCitizenOpinion = async (
 
   const res = await getResponse<OpinionItem[]>(url);
 
-  if (!res || res.length === 0) {
+  if (!res) {
     console.warn("시민 의견 API 실패. 더미데이터 반환");
     return dummyCitizenOpinion;
   }
