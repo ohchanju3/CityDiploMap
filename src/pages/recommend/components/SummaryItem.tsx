@@ -55,9 +55,10 @@ export default SummaryItem;
 const BlockWrapper = styled.section<{ $withImageBg: boolean }>`
   display: flex;
   gap: 2.81rem;
-  padding-bottom: 2.81rem;
-  ${({ $withImageBg, theme }) =>
-    !$withImageBg && `border-bottom: 1px solid ${theme.colors.gray05};`}
+  ${({ $withImageBg, theme }) => `
+    padding-bottom: ${$withImageBg ? "0" : "2.81rem"};
+    ${!$withImageBg ? `border-bottom: 1px solid ${theme.colors.gray05};` : ""}
+  `}
 `;
 
 const SummaryImgBg = styled.section`
