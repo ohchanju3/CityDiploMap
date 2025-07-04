@@ -20,6 +20,11 @@ import {
 } from "@apis/recommend/getExchangeProposal";
 import RecommendSummary from "./components/RecommendSummary";
 import { getSummary, type SummaryData } from "@apis/recommend/getSummary";
+import ExchangeInfo from "./components/ExchangeInfo";
+import {
+  getCountryInfo,
+  type CountryInfoData,
+} from "@apis/recommend/getCountryInfo";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -70,6 +75,8 @@ const RecommendPage = () => {
   );
   const [proposalData, setProposalData] = useState<ProposalData | null>(null);
   const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
+  const [countryInfoData, setCountryInfoData] =
+    useState<CountryInfoData | null>(null);
 
   useEffect(() => {
     if (isSubmitted && isAllSelected) {
@@ -78,6 +85,7 @@ const RecommendPage = () => {
       );
       getExchangeProposal().then(setProposalData);
       getSummary().then(setSummaryData);
+      getCountryInfo(country).then(setCountryInfoData);
     }
   }, [isSubmitted, city]);
 
@@ -100,7 +108,8 @@ const RecommendPage = () => {
         isSubmitted &&
         strategyData &&
         proposalData &&
-        summaryData && (
+        summaryData &&
+        countryInfoData && (
           <>
             <ExchangeStrategy
               city={city}
@@ -109,6 +118,10 @@ const RecommendPage = () => {
             />
             <ExchangeProposal data={proposalData} />
             <RecommendSummary data={summaryData} />
+            <ExchangeInfo
+              country={country}
+              content={countryInfoData.nation_info}
+            />
           </>
         )}
     </>

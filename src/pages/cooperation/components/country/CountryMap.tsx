@@ -1,20 +1,13 @@
 import MainTitle from "@components/MainTitle";
+import { CountryNameToEn } from "@utils/nameToEn";
 import styled from "styled-components";
 
 interface CountryProps {
-  country: string | null;
+  country: string;
 }
 
-const countryImageMap: Record<string, string> = {
-  인도네시아: "Indonesia.png",
-  베트남: "Vietnam.png",
-  콜롬비아: "Colombia.png",
-  우즈베키스탄: "Uzbekistan.png",
-  에티오피아: "Ethiopia.png",
-};
-
 const CountryMap = ({ country }: CountryProps) => {
-  const imageSrc = country ? `/images/country/${countryImageMap[country]}` : "";
+  const imageSrc = CountryNameToEn[country];
 
   return (
     <>
@@ -28,7 +21,7 @@ const CountryMap = ({ country }: CountryProps) => {
         type="contentTitle"
       />
       <CountryMapWrapper>
-        {imageSrc && <img src={imageSrc} />}
+        {imageSrc && <img src={`/images/country/${imageSrc}.png`} />}
       </CountryMapWrapper>
     </>
   );
