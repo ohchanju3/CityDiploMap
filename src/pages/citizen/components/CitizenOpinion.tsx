@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import OpinionCard from "./OpinionCard";
 import { fonts } from "@styles/fonts";
+import OpinionModal from "./OpinionModal";
 
 interface opinionProps {
   labelList: string[];
@@ -18,6 +19,7 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
   const [selectedCity, setSelectedCity] = useState(labelList[0] || "전체");
   const [opinionData, setOpinionData] = useState<OpinionItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ITEMS_PER_PAGE = 3;
   const PAGE_GROUP_SIZE = 3;
@@ -51,6 +53,19 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
     tabRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // 모달 open일때 스크롤 막기
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   return (
     <>
       <MainTitle
@@ -61,7 +76,7 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
           <Button
             text="의견 남기기"
             img="/icons/edit.svg"
-            onClick={() => alert("의견 작성 기능 구현 예정")}
+            onClick={() => setIsModalOpen(true)}
           />
         }
       />
@@ -107,6 +122,12 @@ const CitizenOpinion = ({ labelList }: opinionProps) => {
           </Arrow>
         )}
       </Pagination>
+
+      {isModalOpen && (
+        <ModalOverlay>
+          <OpinionModal />
+        </ModalOverlay>
+      )}
     </>
   );
 };
@@ -153,6 +174,19 @@ const Arrow = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(18, 18, 18, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default CitizenOpinion;

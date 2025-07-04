@@ -8,6 +8,7 @@ interface FilterItemProps {
   selected: string | null;
   onSelect: (value: string) => void;
   placeholder?: string;
+  gap?: string;
 }
 
 const FilterItem = ({
@@ -16,6 +17,7 @@ const FilterItem = ({
   selected,
   onSelect,
   placeholder = "선택",
+  gap = "0.5rem",
 }: FilterItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen((prev) => !prev);
@@ -26,7 +28,7 @@ const FilterItem = ({
   };
 
   return (
-    <FilterItemWrapper>
+    <FilterItemWrapper $gap={gap}>
       <FilterItemTitle>{title}</FilterItemTitle>
       <DropdownWrapper>
         <DropdownButton onClick={toggleDropdown} $hasValue={!!selected}>
@@ -52,10 +54,10 @@ const FilterItem = ({
 
 export default FilterItem;
 
-const FilterItemWrapper = styled.div`
+const FilterItemWrapper = styled.div<{ $gap: string }>`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ${({ $gap }) => $gap};
 `;
 
 const FilterItemTitle = styled.p`
