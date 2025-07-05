@@ -24,7 +24,7 @@ const CityRanking = ({ city, data }: CountryCategoryProps) => {
         </DonutWrapper>
         <CountryDonutText>
           <h1>{city}의 자매 · 우호결연 도시 보유국</h1>
-          <p>{data.city_nation_explain}</p>
+          <p>{data.local_ratio_explain_detail}</p>
         </CountryDonutText>
       </CountryDonutChartContainer>
     </>

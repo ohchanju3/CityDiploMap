@@ -21,9 +21,9 @@ const CountryExchangeCase = ({ country, data }: Props) => {
       <ExchangeCaseCardList>
         {data.map((item) => (
           <ExchangeCaseCard
-            key={item.exchage_id}
-            content={item.exchage_content}
-            category={item.exchage_category}
+            key={item.exchange_id}
+            content={item.exchange_content}
+            category={item.exchange_category}
           />
         ))}
       </ExchangeCaseCardList>
