@@ -100,8 +100,8 @@ const RecommendPage = () => {
   return (
     <>
       <MainTitle
-        title="실행 가능한 교류 전략을 설계해보세요!"
-        subtitle="선택한 국가와 조건에 따라 적합한 협력 방안을 제안해드려요."
+        title="우리 지자체에 꼭 맞는 교류 전략을 설계해보세요!"
+        subtitle="선택하신 지자체와 국가, 교류 분야, 협력 목적에 맞춰 실현 가능성이 높은 교류 전략을 추천해드려요."
         rightBtn={
           <Button
             text="조회하기"

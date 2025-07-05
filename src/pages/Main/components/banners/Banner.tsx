@@ -5,19 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 const images = [
   {
-    src: "/images/main/banner1.svg",
+    src: "/images/main/banner1.png",
     buttonText: "자세히 보기",
     buttonColor: "blue",
-    link: "/recommend",
-  },
-  {
-    src: "/images/main/banner2.svg",
-    buttonText: "자세히 보기",
-    buttonColor: "green",
     link: "/cooperation",
   },
   {
-    src: "/images/main/banner3.svg",
+    src: "/images/main/banner2.png",
+    buttonText: "자세히 보기",
+    buttonColor: "green",
+    link: "/recommend",
+  },
+  {
+    src: "/images/main/banner3.png",
     buttonText: "자세히 보기",
     buttonColor: "blue",
     link: "/citizen",

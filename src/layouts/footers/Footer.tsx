@@ -8,11 +8,11 @@ const Footer = () => {
       <FooterTextTop>
         <p>(04559) 서울특별시 중구 퇴계로 265</p>
         <p>대표전화 010-1234-5678</p>
-        <p>대표메일 diplow.gmail.com</p>
+        <p>대표메일 diplow@gmail.com</p>
       </FooterTextTop>
       <FooterInfo>
         <FooterText>
-          <p>이용 안내</p>
+          <p>이용안내</p>
           <p>개인정보처리방침</p>
         </FooterText>
         <CopyRight>© dplow. All rights reserved.</CopyRight>

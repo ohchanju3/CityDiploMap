@@ -69,6 +69,9 @@ const ExchangeCaseCardImgContainer = styled.section<{ $bgColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  overflow: hidden;
 
   img {
     width: 80px;
