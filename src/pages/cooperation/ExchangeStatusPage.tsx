@@ -31,7 +31,7 @@ import {
 import CityExchangeCard from "./components/city/CityExchangeCard";
 import {
   getCityCategory,
-  type CityCategoryData,
+  type CityCategoryItem,
 } from "@apis/cooperation/getCityCategory";
 import CityVision from "./components/city/CityVision";
 import {
@@ -84,8 +84,9 @@ const ExchangeStatusPage = () => {
   const [cityRankingData, setCityRankingData] =
     useState<CityRankingData | null>(null);
 
-  const [cityCategoryData, setCityCategoryData] =
-    useState<CityCategoryData | null>(null);
+  const [cityCategoryData, setCityCategoryData] = useState<
+    CityCategoryItem[] | null
+  >(null);
 
   const [cityVisionData, setCityVisionData] = useState<CityVisionData | null>(
     null

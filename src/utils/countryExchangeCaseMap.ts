@@ -24,6 +24,11 @@ export const CATEGORY_MAP = (
       img: "/images/exchange/system.png",
       bgColor: theme.colors.cardBlue,
     },
+    etc: {
+      label: "기타",
+      img: "/images/exchange/etc.png",
+      bgColor: theme.colors.blue07,
+    },
   };
 
   return map[category];

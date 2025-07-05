@@ -1,13 +1,10 @@
+import type { CityCategoryItem } from "@apis/cooperation/getCityCategory";
 import MainTitle from "@components/MainTitle";
 import styled from "styled-components";
 
-interface CategoryData {
-  category: string;
-}
-
 interface Props {
   city: string;
-  data?: CategoryData[];
+  data?: CityCategoryItem[];
 }
 
 const CityExchangeCard = ({ city, data }: Props) => {
@@ -24,8 +21,8 @@ const CityExchangeCard = ({ city, data }: Props) => {
         {data?.map((item, idx) => (
           <img
             key={idx}
-            src={`/images/cooperation/card/${item.category}.png`}
-            alt={item.category}
+            src={`/images/cooperation/card/${item.exchange_name}.png`}
+            alt={item.exchange_name}
           />
         ))}
       </ExchangeCaseCardList>
