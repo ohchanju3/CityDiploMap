@@ -18,6 +18,7 @@ const CityVision = ({ city, data }: Props) => {
         title={`${city}에서 설정한 집중 사업영역을 살펴봐요!`}
         subtitle={`${city}가 소개하는 국제교류 비전과 이를 실현하기 위한 추진 과제를 확인해보세요.`}
         marginTop="9.38rem"
+        type="contentTitle"
       />
 
       <CardList>

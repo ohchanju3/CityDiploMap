@@ -81,7 +81,8 @@ const Wrapper = styled.div`
 
 const CardTrack = styled.div`
   display: flex;
-  gap: 75px;
+  /* gap: 75px; */
+  justify-content: space-between;
 `;
 
 const CardWrapper = styled.div`
