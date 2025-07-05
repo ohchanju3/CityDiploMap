@@ -1,13 +1,19 @@
-import type { CityCategoryData } from "@apis/cooperation/getCityCategory";
+import type { CityCategoryItem } from "@apis/cooperation/getCityCategory";
 
-export const dummyCityCategory: CityCategoryData = [
+export const dummyCityCategory: CityCategoryItem[] = [
   {
-    category: "culture",
+    exchange_name: "culture",
+    exchange_display: "문화/공공외교",
+    exchange_num: "3",
   },
   {
-    category: "edu",
+    exchange_name: "edu",
+    exchange_display: "교육/역량강화",
+    exchange_num: "2",
   },
   {
-    category: "system",
+    exchange_name: "system",
+    exchange_display: "제도/행정/포용",
+    exchange_num: "1",
   },
 ];

@@ -22,17 +22,19 @@ const CityVision = ({ city, data }: Props) => {
       />
 
       <CardList>
-        {data.map(({ vision_category, vision_title, vision_content }, idx) => (
-          <ExchangeCaseCard
-            key={idx}
-            content={vision_content}
-            category={vision_category}
-            title={vision_title}
-            img={`/images/cooperation/card/${imageName}.png`}
-            bgColor="#DFE8F4"
-            useCategoryMap={false}
-          />
-        ))}
+        {data.map(
+          ({ project_category, project_title, project_content }, idx) => (
+            <ExchangeCaseCard
+              key={idx}
+              content={project_content}
+              category={project_category}
+              title={project_title}
+              img={`/images/cooperation/card/${imageName}.png`}
+              bgColor="#DFE8F4"
+              useCategoryMap={false}
+            />
+          )
+        )}
       </CardList>
     </>
   );

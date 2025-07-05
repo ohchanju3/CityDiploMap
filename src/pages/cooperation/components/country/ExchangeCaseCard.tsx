@@ -55,12 +55,6 @@ const ExchangeCaseCardWrapper = styled.div`
   width: 24rem;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
-
-  span {
-    ${fonts.body18M};
-    color: ${({ theme }) => theme.colors.gray02};
-    cursor: pointer;
-  }
 `;
 
 const ExchangeCaseCardImgContainer = styled.section<{ $bgColor: string }>`
