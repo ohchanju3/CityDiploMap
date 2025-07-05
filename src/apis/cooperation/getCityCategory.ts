@@ -10,7 +10,7 @@ export type CityCategoryData = CityCategoryItem[];
 export const getCityCategory = async (
   city: string
 ): Promise<CityCategoryData | null> => {
-  const url = `/api/local-status/major-exchage?local=${city}`;
+  const url = `/api/local-status/major-exchange?local=${city}`;
   const res = await getResponse<CityCategoryData>(url);
 
   if (!res || res.length === 0) {

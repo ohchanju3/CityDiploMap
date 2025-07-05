@@ -14,7 +14,7 @@ export type CityVisionData = CityVisionItem[];
 export const getCityVision = async (
   city: string
 ): Promise<CityVisionData | null> => {
-  const url = `/cooperation/local/vision?city=${city}`;
+  const url = `/api/local-status/vision?local=${city}`;
   const res = await getResponse<CityVisionData>(url);
 
   if (!res || res.length === 0) {

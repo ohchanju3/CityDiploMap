@@ -4,7 +4,6 @@ import styled, { useTheme } from "styled-components";
 
 interface CityDonutChartProps {
   city_ranking: {
-    nation_id: number;
     nation_name: string;
     percent: number;
   }[];

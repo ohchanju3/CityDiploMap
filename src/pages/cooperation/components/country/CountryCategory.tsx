@@ -29,7 +29,7 @@ const CountryCategory = ({ country, data }: CountryCategoryProps) => {
         </DonutWrapper>
         <CountryDonutText>
           <h1>{country} 분야별 교류 비율</h1>
-          <p>{data.exchage_explain}</p>
+          <p>{data.nation_ratio_explain}</p>
         </CountryDonutText>
       </CountryDonutChartContainer>
     </>
