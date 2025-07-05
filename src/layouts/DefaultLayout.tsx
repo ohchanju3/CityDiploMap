@@ -4,11 +4,13 @@ import styled from "styled-components";
 import Header from "./headers/Header";
 import FlexLayout from "./FlexLayout";
 import Footer from "./footers/Footer";
+import ScrollToTop from "@components/ScrollToTop";
 
 const DefaultLayout = () => {
   return (
     <LayoutWrapper>
       <Header />
+      <ScrollToTop />
       <ContentWrapper>
         <FlexLayout>
           <Outlet />

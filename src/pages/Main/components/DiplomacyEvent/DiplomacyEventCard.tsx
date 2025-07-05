@@ -72,6 +72,7 @@ const Move = styled.p`
   width: 100%;
   justify-content: flex-end;
   color: ${({ theme }) => theme.colors.gray02};
+  ${fonts.cap16M}
 `;
 
 export default DiplomacyEventCard;
