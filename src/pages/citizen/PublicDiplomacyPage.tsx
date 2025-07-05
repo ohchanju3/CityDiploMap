@@ -13,7 +13,7 @@ const CITY_LIST = [
 const PublicDiplomacyPage = () => {
   return (
     <>
-      <img src="/images/main/banner3.png" />
+      <img src="/images/main/citizenBanner.png" />
       <CitizenEvents labelList={CITY_LIST} />
       <CitizenOpinion labelList={CITY_LIST} />
     </>
