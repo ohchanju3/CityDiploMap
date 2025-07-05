@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
 import type { EventItem } from "@apis/main/getDipEvent";
@@ -20,10 +20,7 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const totalPages = Math.ceil(data.length / itemsPerView);
@@ -31,17 +28,13 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
   const end = start + itemsPerView;
   const visibleData = data.slice(start, end);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const handleNext = () => {
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
     setCurrentIndex((prev) => Math.min(prev + 1, totalPages - 1));
-  };
 
   return (
     <Wrapper>
-      <CardTrack>
+      <CardTrack $visibleCount={visibleData.length}>
         {visibleData.map((item) => (
           <CardWrapper key={item.event_id}>
             <DiplomacyEventCard
@@ -79,10 +72,16 @@ const Wrapper = styled.div`
   margin-top: 2.81rem;
 `;
 
-const CardTrack = styled.div`
+const CardTrack = styled.div<{ $visibleCount: number }>`
   display: flex;
-  /* gap: 75px; */
-  justify-content: space-between;
+  ${({ $visibleCount }) =>
+    $visibleCount === 3
+      ? css`
+          justify-content: space-between;
+        `
+      : css`
+          gap: 2.5rem;
+        `}
 `;
 
 const CardWrapper = styled.div`
@@ -99,9 +98,7 @@ const Pagination = styled.div`
 
 const PageIndicator = styled.div`
   padding: 0.875rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.blue01};
   border-radius: 62.5rem;
-  font-size: 0.95rem;
   height: 2.5rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   color: ${({ theme }) => theme.colors.gray02};
@@ -120,12 +117,10 @@ const Arrow = styled.section`
   height: 2.5rem;
   border-radius: 66.66669rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
-  color: ${({ theme }) => theme.colors.gray02};
   background: ${({ theme }) => theme.colors.gray07};
-  font-size: 0.95rem;
-  justify-content: center;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
 `;
 

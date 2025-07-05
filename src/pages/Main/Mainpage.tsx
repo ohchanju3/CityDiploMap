@@ -44,9 +44,8 @@ const Mainpage = () => {
 
   const navigate = useNavigate();
 
-  //TODO: 경로 수정 필요 ~~
   const handleClick = () => {
-    navigate(`/my`);
+    navigate(`/citizen`);
   };
 
   return (
