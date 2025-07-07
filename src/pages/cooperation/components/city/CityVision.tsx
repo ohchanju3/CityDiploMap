@@ -42,7 +42,8 @@ const CityVision = ({ city, data }: Props) => {
 
 const CardList = styled.div`
   display: flex;
-  gap: 2rem;
+  /* gap: 2rem; */
+  justify-content: space-between;
   margin-top: 3rem;
 `;
 

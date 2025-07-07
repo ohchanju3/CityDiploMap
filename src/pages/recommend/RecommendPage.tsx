@@ -63,7 +63,7 @@ const RecommendPage = () => {
       options: CATEGORY_OPTIONS,
       selected: category,
       onSelect: setCategory,
-      placeholder: "경제·통상",
+      placeholder: "보건 · 환경 · 기술",
     },
     {
       title: "협력 목적",
