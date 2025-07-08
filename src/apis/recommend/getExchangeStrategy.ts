@@ -1,27 +1,52 @@
-import { getResponse } from "../instance";
+import { postResponse } from "../instance";
 import { dummyExchangeStrategy } from "@apis/dummy/dummyExchangeStrategy";
 
-export interface ExchangeStrategyItem {
-  strategy: string;
-  content: string;
+export interface RecommendedStrategyType {
+  type: string;
+  description: string;
 }
 
-export type ExchangeStrategyData = ExchangeStrategyItem[];
+export interface ExchangeCooperationProject {
+  project_name: string;
+  project_category: string;
+  description: string;
+}
+
+export interface SummaryOfRecommendations {
+  major_issues_by_country: string;
+  local_government_diplomatic_assets: string;
+  case_study_based_analysis: string;
+}
+
+export interface ExchangeStrategyData {
+  recommended_strategy_types: RecommendedStrategyType[];
+  exchange_cooperation_projects: ExchangeCooperationProject[];
+  summary_of_recommendations: SummaryOfRecommendations;
+}
 
 export const getExchangeStrategy = async (
-  city: string,
-  country: string,
+  local: string,
+  nation: string,
   category: string,
   purpose: string
 ): Promise<ExchangeStrategyData | null> => {
-  //TODO: url 확인 후 추가 필요
-  const url = `/api/strategy/city?local=${city}/country?=${country}/${purpose}/${category}`;
-  const res = await getResponse<ExchangeStrategyData>(url);
+  const url = `/api/recommend/gpt/public-diplomacy`;
+  const body = {
+    local,
+    nation,
+    category,
+    purpose,
+  };
 
-  if (!res || res.length === 0) {
-    console.warn("지자체 교류 카테고리 데이터 없음. 더미데이터 반환");
+  const res = await postResponse<typeof body, { data: ExchangeStrategyData }>(
+    url,
+    body
+  );
+
+  if (!res || !res.data) {
+    console.warn("지자체 교류 전략 데이터 없음. 더미데이터 반환");
     return dummyExchangeStrategy;
   }
 
-  return res;
+  return res.data;
 };

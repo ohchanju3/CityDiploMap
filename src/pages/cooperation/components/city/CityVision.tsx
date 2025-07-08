@@ -16,22 +16,25 @@ const CityVision = ({ city, data }: Props) => {
     <>
       <MainTitle
         title={`${city}에서 설정한 집중 사업영역을 살펴봐요!`}
-        subtitle={`${city}가 소개하는 국제교류 비전과 이를 실현하기 위한 추진 과제를 확인해보세요.`}
+        subtitle={`${city}는 글로벌 도시로 도약하기 위해 다양한 전략과 이니셔티브를 추진하며, 교류 역량을 키우고 특화된 발전 방향을 마련하고 있어요.`}
         marginTop="9.38rem"
+        type="contentTitle"
       />
 
       <CardList>
-        {data.map(({ vision_category, vision_title, vision_content }, idx) => (
-          <ExchangeCaseCard
-            key={idx}
-            content={vision_content}
-            category={vision_category}
-            title={vision_title}
-            img={`/images/cooperation/card/${imageName}.png`}
-            bgColor="#DFE8F4"
-            useCategoryMap={false}
-          />
-        ))}
+        {data.map(
+          ({ project_category, project_title, project_content }, idx) => (
+            <ExchangeCaseCard
+              key={idx}
+              content={project_content}
+              category={project_category}
+              title={project_title}
+              img={`/images/cooperation/card/${imageName}.png`}
+              bgColor="#DFE8F4"
+              useCategoryMap={false}
+            />
+          )
+        )}
       </CardList>
     </>
   );
@@ -39,7 +42,8 @@ const CityVision = ({ city, data }: Props) => {
 
 const CardList = styled.div`
   display: flex;
-  gap: 2rem;
+  /* gap: 2rem; */
+  justify-content: space-between;
   margin-top: 3rem;
 `;
 

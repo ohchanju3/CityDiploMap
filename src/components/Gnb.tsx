@@ -5,7 +5,7 @@ import styled from "styled-components";
 const gnbItem = [
   { label: "교류 협력 현황", onClick: "/cooperation" },
   { label: "교류 전략 추천", onClick: "/recommend" },
-  { label: "시민 외교 참여", onClick: "/citizen" },
+  { label: "시민 참여 외교", onClick: "/citizen" },
 ];
 
 const Gnb = () => {

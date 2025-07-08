@@ -51,6 +51,7 @@ const ModalWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   background: white;
   width: 176px;
+  z-index: 99;
   z-index: 100;
 
   &::after {

@@ -48,6 +48,7 @@ const TitleContainer = styled.section`
   p {
     ${fonts.body20B}
     color: ${({ theme }) => theme.colors.blue01};
+    flex-shrink: 0;
   }
 `;
 

@@ -4,11 +4,13 @@ import styled from "styled-components";
 import Header from "./headers/Header";
 import FlexLayout from "./FlexLayout";
 import Footer from "./footers/Footer";
+import ScrollToTop from "@components/ScrollToTop";
 
 const DefaultLayout = () => {
   return (
     <LayoutWrapper>
       <Header />
+      <ScrollToTop />
       <ContentWrapper>
         <FlexLayout>
           <Outlet />
@@ -31,4 +33,5 @@ const ContentWrapper = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;

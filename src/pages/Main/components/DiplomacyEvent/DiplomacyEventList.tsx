@@ -1,14 +1,27 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
-import type { EventItem } from "@apis/main/getDipEvent";
 
-interface CountryTrendCardListProps {
-  data: EventItem[];
+interface CommonCardData {
+  [key: string]: any;
 }
 
-const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
+interface DiplomacyEventListProps<T extends CommonCardData> {
+  data: T[];
+  getTitle?: (item: T) => string;
+  getContent?: (item: T) => string;
+  getCategory?: (item: T) => string;
+  getUrl?: (item: T) => string;
+}
+
+const DiplomacyEventList = <T extends CommonCardData>({
+  data,
+  getTitle,
+  getContent,
+  getCategory,
+  getUrl,
+}: DiplomacyEventListProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
 
@@ -20,10 +33,7 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const totalPages = Math.ceil(data.length / itemsPerView);
@@ -31,25 +41,20 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
   const end = start + itemsPerView;
   const visibleData = data.slice(start, end);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const handleNext = () => {
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
     setCurrentIndex((prev) => Math.min(prev + 1, totalPages - 1));
-  };
 
   return (
     <Wrapper>
-      <CardTrack>
-        {visibleData.map((item) => (
-          <CardWrapper key={item.event_id}>
+      <CardTrack $visibleCount={visibleData.length}>
+        {visibleData.map((item, index) => (
+          <CardWrapper key={index}>
             <DiplomacyEventCard
-              id={item.event_id}
-              title={item.event_title}
-              content={item.event_content}
-              category={item.event_category}
-              url={item.url}
+              title={getTitle ? getTitle(item) : item.event_title}
+              content={getContent ? getContent(item) : item.event_content}
+              category={getCategory ? getCategory(item) : item.event_category}
+              url={getUrl?.(item) ?? item.url}
             />
           </CardWrapper>
         ))}
@@ -79,9 +84,16 @@ const Wrapper = styled.div`
   margin-top: 2.81rem;
 `;
 
-const CardTrack = styled.div`
+const CardTrack = styled.div<{ $visibleCount: number }>`
   display: flex;
-  gap: 75px;
+  ${({ $visibleCount }) =>
+    $visibleCount === 3
+      ? css`
+          justify-content: space-between;
+        `
+      : css`
+          gap: 2.5rem;
+        `}
 `;
 
 const CardWrapper = styled.div`
@@ -98,9 +110,7 @@ const Pagination = styled.div`
 
 const PageIndicator = styled.div`
   padding: 0.875rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.blue01};
   border-radius: 62.5rem;
-  font-size: 0.95rem;
   height: 2.5rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   color: ${({ theme }) => theme.colors.gray02};
@@ -119,12 +129,10 @@ const Arrow = styled.section`
   height: 2.5rem;
   border-radius: 66.66669rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
-  color: ${({ theme }) => theme.colors.gray02};
   background: ${({ theme }) => theme.colors.gray07};
-  font-size: 0.95rem;
-  justify-content: center;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
 `;
 

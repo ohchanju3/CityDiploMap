@@ -1,10 +1,10 @@
-import type { SummaryData } from "@apis/recommend/getSummary";
 import MainTitle from "@components/MainTitle";
 import styled from "styled-components";
 import SummaryItem from "./SummaryItem";
+import type { ExchangeStrategyData } from "@apis/recommend/getExchangeStrategy";
 
 interface SummaryProps {
-  data: SummaryData;
+  data: ExchangeStrategyData;
 }
 
 const imageMap = [
@@ -16,6 +16,22 @@ const imageMap = [
 const bgColorMap = ["yellow03", "green03", "blue04"];
 
 const RecommendSummary = ({ data }: SummaryProps) => {
+  const summaries = [
+    {
+      title: "대상국 교류협력 수요",
+      content: data.summary_of_recommendations.major_issues_by_country,
+    },
+    {
+      title: "우리 지자체 외교 자산",
+      content:
+        data.summary_of_recommendations.local_government_diplomatic_assets,
+    },
+    {
+      title: "기존 사례 기반 분석",
+      content: data.summary_of_recommendations.case_study_based_analysis,
+    },
+  ];
+
   return (
     <>
       <MainTitle
@@ -25,7 +41,7 @@ const RecommendSummary = ({ data }: SummaryProps) => {
       />
 
       <SummaryWrapper>
-        {data.map((item, idx) => (
+        {summaries.map((item, idx) => (
           <SummaryItem
             key={idx}
             title={item.title}

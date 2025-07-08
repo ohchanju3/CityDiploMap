@@ -3,7 +3,8 @@ import { dummyCountryRatio } from "@apis/dummy/dummyCountryRatio";
 
 export interface CategoryRatioData {
   nation_dash_id: number;
-  exchage_explain: string;
+  nation_ratio_explain: string;
+  nation_ratio_explain_detail: string;
   category_ratio: {
     health: number;
     edu: number;

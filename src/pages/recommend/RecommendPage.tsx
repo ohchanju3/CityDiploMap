@@ -14,12 +14,7 @@ import {
   type ExchangeStrategyData,
 } from "@apis/recommend/getExchangeStrategy";
 import ExchangeProposal from "./components/ExchangeProposal";
-import {
-  getExchangeProposal,
-  type ProposalData,
-} from "@apis/recommend/getExchangeProposal";
 import RecommendSummary from "./components/RecommendSummary";
-import { getSummary, type SummaryData } from "@apis/recommend/getSummary";
 import ExchangeInfo from "./components/ExchangeInfo";
 import {
   getCountryInfo,
@@ -63,7 +58,7 @@ const RecommendPage = () => {
       options: CATEGORY_OPTIONS,
       selected: category,
       onSelect: setCategory,
-      placeholder: "경제·통상",
+      placeholder: "보건 · 환경 · 기술",
     },
     {
       title: "협력 목적",
@@ -77,8 +72,6 @@ const RecommendPage = () => {
   const [strategyData, setStrategyData] = useState<ExchangeStrategyData | null>(
     null
   );
-  const [proposalData, setProposalData] = useState<ProposalData | null>(null);
-  const [summaryData, setSummaryData] = useState<SummaryData | null>(null);
   const [countryInfoData, setCountryInfoData] =
     useState<CountryInfoItem | null>(null);
   const [trendsData, setTrendsData] = useState<TrendItem[]>([]);
@@ -89,8 +82,6 @@ const RecommendPage = () => {
       getExchangeStrategy(city, country, category, purpose).then(
         setStrategyData
       );
-      getExchangeProposal().then(setProposalData);
-      getSummary().then(setSummaryData);
       getCountryInfo(country).then(setCountryInfoData);
       getTrendCountry(country).then(setTrendsData);
       getEnvIssue(country).then(setEnvIssueData);
@@ -100,8 +91,8 @@ const RecommendPage = () => {
   return (
     <>
       <MainTitle
-        title="실행 가능한 교류 전략을 설계해보세요!"
-        subtitle="선택한 국가와 조건에 따라 적합한 협력 방안을 제안해드려요."
+        title="우리 지자체에 꼭 맞는 교류 전략을 설계해보세요!"
+        subtitle="선택하신 지자체와 국가, 교류 분야, 협력 목적에 맞춰 실현 가능성이 높은 교류 전략을 추천해드려요."
         rightBtn={
           <Button
             text="조회하기"
@@ -112,25 +103,16 @@ const RecommendPage = () => {
         }
       />
       <FilterContainer filters={filters} />;
-      {isAllSelected &&
-        isSubmitted &&
-        strategyData &&
-        proposalData &&
-        summaryData &&
-        countryInfoData && (
-          <>
-            <ExchangeStrategy
-              city={city}
-              country={country}
-              data={strategyData}
-            />
-            <ExchangeProposal data={proposalData} />
-            <RecommendSummary data={summaryData} />
-            <ExchangeInfo country={country} data={countryInfoData} />
-            <ExchangeRecent country={country} data={trendsData} />
-            <ExchangeEnvIssue country={country} data={envIssueData} />
-          </>
-        )}
+      {isAllSelected && isSubmitted && strategyData && countryInfoData && (
+        <>
+          <ExchangeStrategy city={city} country={country} data={strategyData} />
+          <ExchangeProposal data={strategyData} />
+          <RecommendSummary data={strategyData} />
+          <ExchangeInfo country={country} data={countryInfoData} />
+          <ExchangeRecent country={country} data={trendsData} />
+          <ExchangeEnvIssue country={country} data={envIssueData} />
+        </>
+      )}
     </>
   );
 };
