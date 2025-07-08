@@ -59,7 +59,7 @@ const CityMap = ({ city, data }: CityMapProps) => {
       <CityMapWrapper>{imageSrc && <img src={imageSrc} />}</CityMapWrapper>
 
       <CityContainer>
-        <h1>{city}의 자매 · 우호결연 도시</h1>
+        <h1>{city}의 자매 · 우호도시</h1>
         <CityTextContainer>
           <CityMapDes
             title="자매도시"
@@ -68,7 +68,7 @@ const CityMap = ({ city, data }: CityMapProps) => {
           />
 
           <CityMapDes
-            title="우호결연 도시"
+            title="우호도시"
             chips={friendshipChips}
             description={data?.friendship_city.explain ?? ""}
           />
