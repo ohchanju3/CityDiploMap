@@ -2,13 +2,26 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
-import type { EventItem } from "@apis/main/getDipEvent";
 
-interface CountryTrendCardListProps {
-  data: EventItem[];
+interface CommonCardData {
+  [key: string]: any;
 }
 
-const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
+interface DiplomacyEventListProps<T extends CommonCardData> {
+  data: T[];
+  getTitle?: (item: T) => string;
+  getContent?: (item: T) => string;
+  getCategory?: (item: T) => string;
+  getUrl?: (item: T) => string;
+}
+
+const DiplomacyEventList = <T extends CommonCardData>({
+  data,
+  getTitle,
+  getContent,
+  getCategory,
+  getUrl,
+}: DiplomacyEventListProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
 
@@ -35,14 +48,13 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
   return (
     <Wrapper>
       <CardTrack $visibleCount={visibleData.length}>
-        {visibleData.map((item) => (
-          <CardWrapper key={item.event_id}>
+        {visibleData.map((item, index) => (
+          <CardWrapper key={index}>
             <DiplomacyEventCard
-              id={item.event_id}
-              title={item.event_title}
-              content={item.event_content}
-              category={item.event_category}
-              url={item.url}
+              title={getTitle ? getTitle(item) : item.event_title}
+              content={getContent ? getContent(item) : item.event_content}
+              category={getCategory ? getCategory(item) : item.event_category}
+              url={getUrl?.(item) ?? item.url}
             />
           </CardWrapper>
         ))}
