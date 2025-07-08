@@ -4,6 +4,7 @@ import styled from "styled-components";
 import StrategyDes from "./StrategyDes";
 import { fonts } from "@styles/fonts";
 import type { ExchangeStrategyData } from "@apis/recommend/getExchangeStrategy";
+import { postPdf } from "@apis/recommend/postPdf";
 
 interface ExchangeStrategyProps {
   city: string;
@@ -12,6 +13,9 @@ interface ExchangeStrategyProps {
 }
 
 const ExchangeStrategy = ({ city, country, data }: ExchangeStrategyProps) => {
+  const handleDownloadPdf = () => {
+    postPdf({ local: city, nation: country, ...data });
+  };
   return (
     <>
       <MainTitle
@@ -28,7 +32,7 @@ const ExchangeStrategy = ({ city, country, data }: ExchangeStrategyProps) => {
           <Button
             text="PDF 다운로드"
             img="/icons/download.svg"
-            onClick={() => alert("api 세팅 필요")}
+            onClick={handleDownloadPdf}
           />
         }
         type="contentTitle"
@@ -36,11 +40,11 @@ const ExchangeStrategy = ({ city, country, data }: ExchangeStrategyProps) => {
       <ExchangeStrategyContainer>
         <h1>추천 교류 전략 유형</h1>
         <StrategyDesList>
-          {data.map((item, idx) => (
+          {data.recommended_strategy_types.map((item, idx) => (
             <StrategyDes
               key={idx}
-              chip={item.strategy}
-              description={item.content}
+              chip={item.type}
+              description={item.description}
             />
           ))}
         </StrategyDesList>

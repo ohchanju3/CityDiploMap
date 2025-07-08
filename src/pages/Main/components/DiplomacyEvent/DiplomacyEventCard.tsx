@@ -4,7 +4,7 @@ import Chip from "@components/ChipBadge";
 
 interface DiplomacyEventCardProps {
   title: string;
-  id: number;
+  id?: number;
   category: string;
   content: string;
   url?: string;

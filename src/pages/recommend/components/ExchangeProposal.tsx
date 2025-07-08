@@ -1,9 +1,9 @@
-import type { ProposalData } from "@apis/recommend/getExchangeProposal";
+import type { ExchangeStrategyData } from "@apis/recommend/getExchangeStrategy";
 import MainTitle from "@components/MainTitle";
 import DiplomacyEventList from "@pages/Main/components/DiplomacyEvent/DiplomacyEventList";
 
 interface ProposalProps {
-  data: ProposalData;
+  data: ExchangeStrategyData;
 }
 
 const ExchangeProposal = ({ data }: ProposalProps) => {
@@ -15,7 +15,7 @@ const ExchangeProposal = ({ data }: ProposalProps) => {
         type="contentTitle"
         marginTop="7.81rem"
       />
-      <DiplomacyEventList data={data} />
+      <DiplomacyEventList data={data.exchange_cooperation_projects} />
     </>
   );
 };

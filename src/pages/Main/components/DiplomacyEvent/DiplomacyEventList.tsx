@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import DiplomacyEventCard from "./DiplomacyEventCard";
 import { fonts } from "@styles/fonts";
-import type { EventItem } from "@apis/main/getDipEvent";
+import type { ExchangeCooperationProject } from "@apis/recommend/getExchangeStrategy";
 
 interface CountryTrendCardListProps {
-  data: EventItem[];
+  data: ExchangeCooperationProject[];
 }
 
 const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
@@ -36,13 +36,12 @@ const DiplomacyEventList = ({ data }: CountryTrendCardListProps) => {
     <Wrapper>
       <CardTrack $visibleCount={visibleData.length}>
         {visibleData.map((item) => (
-          <CardWrapper key={item.event_id}>
+          <CardWrapper>
             <DiplomacyEventCard
-              id={item.event_id}
-              title={item.event_title}
-              content={item.event_content}
-              category={item.event_category}
-              url={item.url}
+              title={item.project_name}
+              content={item.description}
+              category={item.project_category}
+              // url={item.url}
             />
           </CardWrapper>
         ))}
