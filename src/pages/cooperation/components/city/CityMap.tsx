@@ -3,6 +3,7 @@ import { fonts } from "@styles/fonts";
 import { theme } from "@styles/theme";
 import styled from "styled-components";
 import CityMapDes from "./CityMapDes";
+import { cityNameToEn } from "@utils/nameToEn";
 
 interface CityRelationData {
   sister_city: {
@@ -20,17 +21,8 @@ interface CityMapProps {
   data?: CityRelationData;
 }
 
-//TODO: 추후 이미지 변경 필요
-const cityImageMap: Record<string, string> = {
-  경기도: "Indonesia.png",
-  부산광역시: "Vietnam.png",
-  서울특별시: "Colombia.png",
-  인천광역시: "Uzbekistan.png",
-  제주특별자치도: "Ethiopia.png",
-};
-
 const CityMap = ({ city, data }: CityMapProps) => {
-  const imageSrc = city ? `/images/country/${cityImageMap[city]}` : "";
+  const imageSrc = city ? `/images/cityMap/${cityNameToEn[city]}.png` : "";
 
   const sisterChips =
     data?.sister_city?.cities.map((c) => ({
@@ -52,14 +44,24 @@ const CityMap = ({ city, data }: CityMapProps) => {
             <Blue>{city}</Blue>의 교류 협력 현황을 살펴보세요!
           </>
         }
-        subtitle="국내 지자체의 자매 · 우호결연 도시, 주요 교류 분야와 비전 및 추진 과제를 확인해보세요. "
+        subtitle="국내 지자체의 자매 · 우호 도시, 주요 교류 분야와 비전 및 추진 과제를 확인해보세요. "
         type="contentTitle"
       />
 
       <CityMapWrapper>{imageSrc && <img src={imageSrc} />}</CityMapWrapper>
+      <CityMapImgDes>
+        <CityMapImgContainer>
+          <div className="blueDot" />
+          <p>자매도시</p>
+        </CityMapImgContainer>
+        <CityMapImgContainer>
+          <div className="yellowDot" />
+          <p>우호도시</p>
+        </CityMapImgContainer>
+      </CityMapImgDes>
 
       <CityContainer>
-        <h1>{city}의 자매 · 우호결연 도시</h1>
+        <h1>{city}의 자매 · 우호도시</h1>
         <CityTextContainer>
           <CityMapDes
             title="자매도시"
@@ -68,7 +70,7 @@ const CityMap = ({ city, data }: CityMapProps) => {
           />
 
           <CityMapDes
-            title="우호결연 도시"
+            title="우호도시"
             chips={friendshipChips}
             description={data?.friendship_city.explain ?? ""}
           />
@@ -87,6 +89,33 @@ const CityMapWrapper = styled.section`
     width: 1010.335px;
     height: 665.24px;
     object-fit: contain;
+  }
+`;
+
+const CityMapImgDes = styled.section`
+  display: flex;
+  gap: 1.56rem;
+  justify-content: flex-end;
+  margin-top: 1.88rem;
+`;
+
+const CityMapImgContainer = styled.section`
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+
+  .blueDot {
+    width: 0.66rem;
+    height: 0.66rem;
+    background: ${({ theme }) => theme.colors.blue02};
+    border-radius: 50%;
+  }
+
+  .yellowDot {
+    width: 0.66rem;
+    height: 0.66rem;
+    background: #ffe0a3;
+    border-radius: 50%;
   }
 `;
 

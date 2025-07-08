@@ -1,5 +1,6 @@
 import type { CityCategoryItem } from "@apis/cooperation/getCityCategory";
 import MainTitle from "@components/MainTitle";
+import { fonts } from "@styles/fonts";
 import styled from "styled-components";
 
 interface Props {
@@ -26,6 +27,9 @@ const CityExchangeCard = ({ city, data }: Props) => {
           />
         ))}
       </ExchangeCaseCardList>
+      <Category>
+        분류: 보건·환경·기술 | 교육·역량강화 | 문화·공공외교 | 제도·행정·포용
+      </Category>
     </>
   );
 };
@@ -39,6 +43,12 @@ const ExchangeCaseCardList = styled.div`
     width: 218.524px;
     height: 223.38px;
   }
+`;
+
+const Category = styled.p`
+  ${fonts.body18M};
+  color: ${({ theme }) => theme.colors.gray04};
+  margin-top: 1.56rem;
 `;
 
 export default CityExchangeCard;

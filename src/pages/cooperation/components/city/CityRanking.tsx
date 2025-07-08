@@ -13,8 +13,8 @@ const CityRanking = ({ city, data }: CountryCategoryProps) => {
   return (
     <>
       <MainTitle
-        title="어떤 나라와 가장 많은 자매도시를 맺고 있을까요?"
-        subtitle="국내 지자체가 가장 많이 자매·우호결연을 맺은 국가들을 순위별로 확인할 수 있어요."
+        title="어떤 나라와 가장 많은 자매결연과 우호교류를 맺고 있을까요?"
+        subtitle="국내 지자체가 가장 많이 자매·우호도시를 맺은 국가들을 순위별로 확인할 수 있어요."
         marginTop="6.25rem"
         type="contentTitle"
       />
@@ -23,7 +23,7 @@ const CityRanking = ({ city, data }: CountryCategoryProps) => {
           <CityDonutChart city_ranking={data.city_ranking} />
         </DonutWrapper>
         <CountryDonutText>
-          <h1>{city}의 자매 · 우호결연 도시 보유국</h1>
+          <h1>{city}의 자매 · 우호도시 보유국</h1>
           <p>{data.local_ratio_explain_detail}</p>
         </CountryDonutText>
       </CountryDonutChartContainer>
