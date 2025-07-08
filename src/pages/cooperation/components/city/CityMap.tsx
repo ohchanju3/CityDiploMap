@@ -44,7 +44,7 @@ const CityMap = ({ city, data }: CityMapProps) => {
             <Blue>{city}</Blue>의 교류 협력 현황을 살펴보세요!
           </>
         }
-        subtitle="국내 지자체의 자매 · 우호결연 도시, 주요 교류 분야와 비전 및 추진 과제를 확인해보세요. "
+        subtitle="국내 지자체의 자매 · 우호 도시, 주요 교류 분야와 비전 및 추진 과제를 확인해보세요. "
         type="contentTitle"
       />
 
