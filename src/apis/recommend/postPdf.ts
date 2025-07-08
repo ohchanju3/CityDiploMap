@@ -40,7 +40,7 @@ export const postPdf = async (body: DownloadPdfRequest) => {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "Diplow_교류전략.pdf";
+    link.download = `${body.local} - ${body.nation} 교류협력 전략 추천(안).pdf`;
     document.body.appendChild(link);
     link.click();
     link.remove();
