@@ -15,7 +15,12 @@ const ExchangeProposal = ({ data }: ProposalProps) => {
         type="contentTitle"
         marginTop="7.81rem"
       />
-      <DiplomacyEventList data={data.exchange_cooperation_projects} />
+      <DiplomacyEventList
+        data={data.recommended_strategy_types}
+        getTitle={(item) => item.type}
+        getContent={(item) => item.description}
+        getCategory={() => "전략유형"}
+      />
     </>
   );
 };
