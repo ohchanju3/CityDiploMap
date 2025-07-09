@@ -102,7 +102,7 @@ const RecommendPage = () => {
           />
         }
       />
-      <FilterContainer filters={filters} />;
+      <FilterContainer filters={filters} />
       {isAllSelected && isSubmitted && strategyData && countryInfoData && (
         <>
           <ExchangeStrategy city={city} country={country} data={strategyData} />

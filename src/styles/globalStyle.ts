@@ -42,6 +42,28 @@ html {
 		font-size:12px;
 	} */
 
+ 
+
+}
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+.skiptranslate {
+  display: none !important;
 }
 
 body {
@@ -56,6 +78,11 @@ body {
     display: none;
 }
 
+}
+
+html, body {
+  height: auto !important;
+  overflow: visible !important;
 }
 
 

@@ -9,6 +9,7 @@ interface Props {
 }
 
 const CityMapDes = ({ title, chips, description }: Props) => {
+  const safeDescription = description || "";
   return (
     <BlockWrapper>
       <TitleContainer>
@@ -26,7 +27,7 @@ const CityMapDes = ({ title, chips, description }: Props) => {
           ))}
         </ChipList>
       </TitleContainer>
-      <Text>{description}</Text>
+      <BlockWrapperText translate="no">{safeDescription}</BlockWrapperText>
     </BlockWrapper>
   );
 };
@@ -57,7 +58,7 @@ const ChipList = styled.div`
   gap: 0.62rem;
 `;
 
-const Text = styled.span`
+const BlockWrapperText = styled.span`
   ${fonts.body20M};
   color: ${({ theme }) => theme.colors.gray03};
   white-space: pre-line;
