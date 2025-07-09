@@ -1,9 +1,9 @@
 export const COUNTRY_OPTIONS = [
   "베트남",
+  "에티오피아",
   "우즈베키스탄",
   "인도네시아",
   "콜롬비아",
-  "에티오피아",
 ];
 
 export const CITY_OPTIONS = [
