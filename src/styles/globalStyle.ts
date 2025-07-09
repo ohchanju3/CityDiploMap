@@ -42,6 +42,8 @@ html {
 		font-size:12px;
 	} */
 
+ 
+
 }
 .goog-te-banner-frame.skiptranslate,
 iframe.goog-te-banner-frame {
@@ -76,6 +78,11 @@ body {
     display: none;
 }
 
+}
+
+html, body {
+  height: auto !important;
+  overflow: visible !important;
 }
 
 

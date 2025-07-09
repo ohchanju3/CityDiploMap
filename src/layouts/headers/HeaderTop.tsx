@@ -4,76 +4,68 @@ import styled from "styled-components";
 import LanguageModal from "../../components/LanguageModal";
 import { useNavigate } from "react-router-dom";
 
+declare global {
+  interface Window {
+    googleTranslateElementInit: () => void;
+    google: any;
+    googleTranslateElementInitLoaded?: boolean;
+  }
+}
+
 const HeaderTop = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState<"ko" | "en">("ko");
   const navigate = useNavigate();
 
-  // MutationObserver 관련 코드 수정
+  // Google 번역기 초기화 및 삽입
   useEffect(() => {
-    const observer = new MutationObserver(() => {
-      document.documentElement.style.height = "auto";
-    });
-
-    // observer.observe()를 한 번만 실행하도록 최적화
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-
-    // cleanup 함수 추가하여 observer를 제거
-    return () => observer.disconnect();
-  }, []);
-
-  // 초기 언어 로드 및 Google Translate 초기화
-  useEffect(() => {
-    const savedLang = localStorage.getItem("language") as "ko" | "en" | null;
+    const savedLang = localStorage.getItem("selectedLanguage") as
+      | "ko"
+      | "en"
+      | null;
     if (savedLang) setLanguage(savedLang);
 
-    // 구글 번역 스크립트 삽입 여부 확인
-    if (!document.querySelector('script[src*="translate_a"]')) {
-      const script = document.createElement("script");
-      script.src =
-        "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
+    // google_translate_element DOM 생성
+    if (!document.getElementById("google_translate_element")) {
+      const div = document.createElement("div");
+      div.id = "google_translate_element";
+      div.style.display = "none";
+      document.body.appendChild(div);
+    }
 
-      window.googleTranslateElementInit = () => {
+    if (window.googleTranslateElementInitLoaded) return;
+
+    window.googleTranslateElementInit = () => {
+      window.googleTranslateElementInitLoaded = true;
+
+      if (window.google?.translate?.TranslateElement) {
         new window.google.translate.TranslateElement(
-          {
-            pageLanguage: "ko",
-            autoDisplay: false,
-          },
+          { pageLanguage: "ko", autoDisplay: false },
           "google_translate_element"
         );
 
         setTimeout(() => {
-          const langToApply = savedLang || "ko";
           const gtCombo = document.querySelector(
             ".goog-te-combo"
           ) as HTMLSelectElement;
-          if (gtCombo) {
-            gtCombo.value = langToApply;
+          if (gtCombo && savedLang) {
+            gtCombo.value = savedLang;
             gtCombo.dispatchEvent(new Event("change"));
           }
         }, 500);
-      };
-
-      document.body.appendChild(script);
-    }
-
-    // cleanup: script 제거
-    return () => {
-      const script = document.querySelector('script[src*="translate_a"]');
-      if (script && script.parentElement) {
-        script.parentElement.removeChild(script); // 부모 요소에서만 제거
       }
     };
+
+    const script = document.createElement("script");
+    script.src =
+      "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
   }, []);
 
-  // 언어 선택 핸들러
   const handleSelectLanguage = (lang: "ko" | "en") => {
     setLanguage(lang);
-    localStorage.setItem("language", lang);
+    localStorage.setItem("selectedLanguage", lang);
     setIsOpen(false);
 
     const gtCombo = document.querySelector(
@@ -91,7 +83,7 @@ const HeaderTop = () => {
 
       <HeaderTopLang onClick={() => setIsOpen(!isOpen)}>
         <HeaderTopLagIcon src="/icons/globe.svg" />
-        Language
+        {language === "ko" ? "한국어" : "English"}
         <HeaderTopLagIcon src="/icons/arrowDown.svg" />
       </HeaderTopLang>
 
@@ -101,16 +93,12 @@ const HeaderTop = () => {
           onSelectLanguage={handleSelectLanguage}
         />
       )}
-
-      {/* 구글 번역 엘리먼트 (숨김 처리) */}
-      <div id="google_translate_element" style={{ display: "none" }} />
     </HeaderTopWrapper>
   );
 };
 
 export default HeaderTop;
 
-// 스타일 정의
 const HeaderTopWrapper = styled.div`
   width: 100%;
   display: flex;
