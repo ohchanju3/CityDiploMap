@@ -24,6 +24,8 @@ import ExchangeRecent from "./components/ExchangeRecent";
 import { getTrendCountry, type TrendItem } from "@apis/main/getCountryTrends";
 import ExchangeEnvIssue from "./components/ExchangeEnvIssue";
 import { getEnvIssue, type EnvIssueItem } from "@apis/recommend/getEnvIssue";
+import Spinner from "@components/Spinner";
+import styled from "styled-components";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -86,35 +88,58 @@ const RecommendPage = () => {
       getTrendCountry(country).then(setTrendsData);
       getEnvIssue(country).then(setEnvIssueData);
     }
-  }, [isSubmitted, city]);
+  }, [isSubmitted, city, country, category, purpose]);
+
+  useEffect(() => {
+    setIsSubmitted(false);
+  }, [city, country, category, purpose]);
 
   return (
     <>
-      <MainTitle
-        title="우리 지자체에 꼭 맞는 교류 전략을 설계해보세요!"
-        subtitle="선택하신 지자체와 국가, 교류 분야, 협력 목적에 맞춰 실현 가능성이 높은 교류 전략을 추천해드려요."
-        rightBtn={
-          <Button
-            text="조회하기"
-            img="/icons/arrowUpRight.svg"
-            onClick={handleSearchClick}
-            disabled={!isAllSelected}
-          />
-        }
-      />
-      <FilterContainer filters={filters} />
-      {isAllSelected && isSubmitted && strategyData && countryInfoData && (
+      {isSubmitted && (!strategyData || !countryInfoData) ? (
+        <Spinner
+          text={
+            <>
+              <Blue>교류 전략 추천 결과</Blue>를 불러오고 있어요!
+            </>
+          }
+        />
+      ) : (
         <>
-          <ExchangeStrategy city={city} country={country} data={strategyData} />
-          <ExchangeProposal data={strategyData} />
-          <RecommendSummary data={strategyData} />
-          <ExchangeInfo country={country} data={countryInfoData} />
-          <ExchangeRecent country={country} data={trendsData} />
-          <ExchangeEnvIssue country={country} data={envIssueData} />
+          <MainTitle
+            title="우리 지자체에 꼭 맞는 교류 전략을 설계해보세요!"
+            subtitle="선택하신 지자체와 국가, 교류 분야, 협력 목적에 맞춰 실현 가능성이 높은 교류 전략을 추천해드려요."
+            rightBtn={
+              <Button
+                text="조회하기"
+                img="/icons/arrowUpRight.svg"
+                onClick={handleSearchClick}
+                disabled={!isAllSelected}
+              />
+            }
+          />
+          <FilterContainer filters={filters} />
+          {isAllSelected && isSubmitted && strategyData && countryInfoData && (
+            <>
+              <ExchangeStrategy
+                city={city}
+                country={country}
+                data={strategyData}
+              />
+              <ExchangeProposal data={strategyData} />
+              <RecommendSummary data={strategyData} />
+              <ExchangeInfo country={country} data={countryInfoData} />
+              <ExchangeRecent country={country} data={trendsData} />
+              <ExchangeEnvIssue country={country} data={envIssueData} />
+            </>
+          )}
         </>
       )}
     </>
   );
 };
+const Blue = styled.span`
+  color: ${({ theme }) => theme.colors.blue01};
+`;
 
 export default RecommendPage;
