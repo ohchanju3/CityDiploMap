@@ -28,6 +28,7 @@ export const colors = {
   yellow01: "#8a5c00",
   yellow02: "#ffe0a3",
   yellow03: "#fff3db",
+  yellowCard: "#FFF3DBCC",
 
   //green
   green01: "#267337",

@@ -4,6 +4,7 @@ import { getResponse } from "@apis/instance";
 export interface TrendItem {
   img?: string;
   title_kr: string;
+  nation_name: string;
   content_kr: string;
   movement_data_id: number;
 }

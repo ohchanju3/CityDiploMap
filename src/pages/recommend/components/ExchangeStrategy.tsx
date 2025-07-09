@@ -10,12 +10,28 @@ interface ExchangeStrategyProps {
   city: string;
   country: string;
   data: ExchangeStrategyData;
+  onDownloadStart: () => void;
+  onDownloadEnd: () => void;
 }
 
-const ExchangeStrategy = ({ city, country, data }: ExchangeStrategyProps) => {
-  const handleDownloadPdf = () => {
-    postPdf({ local: city, nation: country, ...data });
+const ExchangeStrategy = ({
+  city,
+  country,
+  data,
+  onDownloadStart,
+  onDownloadEnd,
+}: ExchangeStrategyProps) => {
+  const handleDownloadPdf = async () => {
+    onDownloadStart();
+    try {
+      await postPdf({ local: city, nation: country, ...data });
+    } catch (err) {
+      console.error("PDF 다운로드 실패", err);
+    } finally {
+      onDownloadEnd();
+    }
   };
+
   return (
     <>
       <MainTitle
@@ -52,7 +68,6 @@ const ExchangeStrategy = ({ city, country, data }: ExchangeStrategyProps) => {
     </>
   );
 };
-
 export default ExchangeStrategy;
 
 const Blue = styled.span`

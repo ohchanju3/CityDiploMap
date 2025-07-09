@@ -5,11 +5,13 @@ export interface CountryInfoItem {
   nation_id: number;
   nation_name: string;
   nation_info: string;
+  nation_economic: string | null;
+  nation_relation?: string | null;
 }
 
 export const getCountryInfo = async (
   country: string
-): Promise<CountryInfoItem> => {
+): Promise<CountryInfoItem | null> => {
   const url = `/api/recommend/nation-info?nation=${country}`;
   const res = await getResponse<CountryInfoItem[]>(url);
 
