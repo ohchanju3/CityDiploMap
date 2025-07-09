@@ -15,7 +15,9 @@ const Footer = () => {
           <p>이용안내</p>
           <p>개인정보처리방침</p>
         </FooterText>
-        <CopyRight>© dplow. All rights reserved.</CopyRight>
+        <CopyRight className="notranslate">
+          © dplow. All rights reserved.
+        </CopyRight>
       </FooterInfo>
     </FooterWrapper>
   );

@@ -81,9 +81,9 @@ const HeaderTop = () => {
     <HeaderTopWrapper>
       <img src="/icons/logo.svg" onClick={() => navigate("/")} />
 
-      <HeaderTopLang onClick={() => setIsOpen(!isOpen)}>
+      <HeaderTopLang onClick={() => setIsOpen(!isOpen)} className="notranslate">
         <HeaderTopLagIcon src="/icons/globe.svg" />
-        {language === "ko" ? "한국어" : "English"}
+        Language
         <HeaderTopLagIcon src="/icons/arrowDown.svg" />
       </HeaderTopLang>
 
