@@ -33,6 +33,7 @@ const RecommendPage = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [purpose, setPurpose] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isPdfDownloading, setIsPdfDownloading] = useState(false);
 
   const isAllSelected = country && city && category && purpose;
 
@@ -121,16 +122,30 @@ const RecommendPage = () => {
           <FilterContainer filters={filters} />
           {isAllSelected && isSubmitted && strategyData && countryInfoData && (
             <>
-              <ExchangeStrategy
-                city={city}
-                country={country}
-                data={strategyData}
-              />
-              <ExchangeProposal data={strategyData} />
-              <RecommendSummary data={strategyData} />
-              <ExchangeInfo country={country} data={countryInfoData} />
-              <ExchangeRecent country={country} data={trendsData} />
-              <ExchangeEnvIssue country={country} data={envIssueData} />
+              {isPdfDownloading ? (
+                <Spinner
+                  text={
+                    <>
+                      <Blue>교류 전략 추천 결과</Blue>를 다운로드하고 있어요!
+                    </>
+                  }
+                />
+              ) : (
+                <>
+                  <ExchangeStrategy
+                    city={city}
+                    country={country}
+                    data={strategyData}
+                    onDownloadStart={() => setIsPdfDownloading(true)}
+                    onDownloadEnd={() => setIsPdfDownloading(false)}
+                  />
+                  <ExchangeProposal data={strategyData} />
+                  <RecommendSummary data={strategyData} />
+                  <ExchangeInfo country={country} data={countryInfoData} />
+                  <ExchangeRecent country={country} data={trendsData} />
+                  <ExchangeEnvIssue country={country} data={envIssueData} />
+                </>
+              )}
             </>
           )}
         </>
