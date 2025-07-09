@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface SummaryItemProps {
   title: string;
-  content: string;
+  content?: string | null;
   image: string;
   bgColor: string;
   imgSize?: {
@@ -11,6 +11,7 @@ interface SummaryItemProps {
     height?: string;
   };
   withImageBg?: boolean;
+  isBorder?: boolean;
 }
 
 const SummaryItem = ({
@@ -20,9 +21,10 @@ const SummaryItem = ({
   bgColor,
   imgSize = { width: "9.8rem", height: "9.8rem" },
   withImageBg = false,
+  isBorder = false,
 }: SummaryItemProps) => {
   return (
-    <BlockWrapper $withImageBg={withImageBg}>
+    <BlockWrapper $isBorder={isBorder}>
       <SummaryImg $bg={bgColor}>
         {withImageBg ? (
           <SummaryImgBg>
@@ -52,12 +54,12 @@ const SummaryItem = ({
 
 export default SummaryItem;
 
-const BlockWrapper = styled.section<{ $withImageBg: boolean }>`
+const BlockWrapper = styled.section<{ $isBorder: boolean }>`
   display: flex;
   gap: 2.81rem;
-  ${({ $withImageBg, theme }) => `
-    padding-bottom: ${$withImageBg ? "0" : "2.81rem"};
-    ${!$withImageBg ? `border-bottom: 1px solid ${theme.colors.gray05};` : ""}
+  ${({ $isBorder, theme }) => `
+    padding-bottom: ${$isBorder ? "0" : "2.81rem"};
+    ${!$isBorder ? `border-bottom: 1px solid ${theme.colors.gray05};` : ""}
   `}
 `;
 
