@@ -27,7 +27,7 @@ const ExchangeInfo = ({ country, data }: InfoProps) => {
       content: data.nation_economic,
       image: `/images/recommend/money.png`,
       bgColor: "yellowCard",
-      imgSize: { width: "9.75rem", height: "9.75rem" },
+      imgSize: { width: "14.75rem", height: "14.75rem" },
       isBorder: true,
     },
     {
