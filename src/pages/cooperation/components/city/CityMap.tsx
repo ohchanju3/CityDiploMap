@@ -103,6 +103,8 @@ const CityMapImgContainer = styled.section`
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  ${fonts.body20M};
+  color: ${({ theme }) => theme.colors.gray04};
 
   .blueDot {
     width: 0.66rem;
