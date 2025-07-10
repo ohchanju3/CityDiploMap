@@ -43,12 +43,12 @@ const BlockWrapper = styled.section`
 const TitleContainer = styled.section`
   display: flex;
   gap: 0.94rem;
-  align-items: center;
 
   p {
     ${fonts.body20B}
     color: ${({ theme }) => theme.colors.blue01};
     flex-shrink: 0;
+    padding-top: 0.3rem;
   }
 `;
 
