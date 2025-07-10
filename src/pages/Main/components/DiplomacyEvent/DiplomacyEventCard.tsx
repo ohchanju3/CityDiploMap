@@ -36,7 +36,6 @@ const DiplomacyEventCardWrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 26rem;
-  height: 15rem;
   padding: 2rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   border-radius: 0.75rem;
