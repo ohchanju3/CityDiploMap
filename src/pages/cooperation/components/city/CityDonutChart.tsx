@@ -124,12 +124,12 @@ const TooltipBox = styled.div<{ $color: string }>`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.gray07};
   gap: 0.44rem;
-  width: 7.3rem;
-  height: 5.25rem;
+  min-width: 7.3rem;
+  max-height: 5.25rem;
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   border-radius: 0.9rem;
   color: ${({ theme }) => theme.colors.gray01};
-
+  padding: 1rem;
   .label {
     ${fonts.cap16M}
     color: ${({ theme }) => theme.colors.gray02};
