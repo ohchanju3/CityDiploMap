@@ -101,6 +101,7 @@ const CardTrack = styled.div<{ $visibleCount: number }>`
 
 const CardWrapper = styled.div`
   min-width: 0;
+  display: flex;
 `;
 
 const Pagination = styled.div`

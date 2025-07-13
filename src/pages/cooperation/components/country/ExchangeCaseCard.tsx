@@ -108,5 +108,6 @@ const MoreInfo = styled.span`
   justify-content: flex-end;
   ${fonts.cap16M};
   color: ${({ theme }) => theme.colors.gray02};
+  cursor: pointer;
 `;
 export default ExchangeCaseCard;
