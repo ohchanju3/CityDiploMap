@@ -22,7 +22,7 @@ const CountryExchangeCase = ({ country, data }: Props) => {
         {data.map((item) => (
           <ExchangeCaseCard
             key={item.exchange_id}
-            content={item.exchange_content}
+            content={item.exchange_name_kr}
             category={item.exchange_category}
           />
         ))}

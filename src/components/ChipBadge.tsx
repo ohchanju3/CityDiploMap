@@ -36,7 +36,6 @@ const ChipWrapper = styled.section<{
 }>`
   display: inline-flex;
   width: fit-content;
-  /* height: 1.5rem; */
   justify-content: center;
   align-items: center;
   padding: ${({ $padding }) => $padding ?? "0rem 0.5rem"};
@@ -44,7 +43,6 @@ const ChipWrapper = styled.section<{
   color: ${({ theme, $textColor }) => $textColor ?? theme.colors.blue02};
   border-radius: ${({ $borderRadius }) => $borderRadius ?? "0.25rem"};
   ${fonts.cap16S}
-  white-space: nowrap;
 `;
 
 export default Chip;

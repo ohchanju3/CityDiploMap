@@ -20,6 +20,7 @@ const ExchangeProposal = ({ data }: ProposalProps) => {
         getTitle={(item) => item.type}
         getContent={(item) => item.description}
         getCategory={() => "전략유형"}
+        isSummary={false}
       />
     </>
   );
