@@ -53,13 +53,13 @@ const CustomTooltip = ({
 const CityDonutChart = ({ city_ranking }: CityDonutChartProps) => {
   const theme = useTheme();
 
-  const sortedRanking = [...city_ranking].sort((a, b) => b.percent - a.percent);
+  // const sortedRanking = [...city_ranking].sort((a, b) => b.percent - a.percent);
 
-  const top3 = sortedRanking.slice(0, 3);
+  const top3 = city_ranking.slice(0, 4);
 
-  const othersPercent = sortedRanking
-    .slice(3)
-    .reduce((acc, cur) => acc + cur.percent, 0);
+  // const othersPercent = sortedRanking
+  //   .slice(3)
+  //   .reduce((acc, cur) => acc + cur.percent, 0);
 
   const chartData = [
     ...top3.map((item) => ({
@@ -68,12 +68,12 @@ const CityDonutChart = ({ city_ranking }: CityDonutChartProps) => {
     })),
   ];
 
-  if (othersPercent > 0) {
-    chartData.push({
-      name: "기타",
-      value: othersPercent,
-    });
-  }
+  // if (othersPercent > 0) {
+  //   chartData.push({
+  //     name: "기타",
+  //     value: othersPercent,
+  //   });
+  // }
 
   const colorLevels = [
     theme.colors.blue01,

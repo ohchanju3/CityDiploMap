@@ -13,6 +13,7 @@ interface DiplomacyEventListProps<T extends CommonCardData> {
   getContent?: (item: T) => string;
   getCategory?: (item: T) => string;
   getUrl?: (item: T) => string;
+  isSummary?: boolean;
 }
 
 const DiplomacyEventList = <T extends CommonCardData>({
@@ -21,6 +22,7 @@ const DiplomacyEventList = <T extends CommonCardData>({
   getContent,
   getCategory,
   getUrl,
+  isSummary,
 }: DiplomacyEventListProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
@@ -55,6 +57,7 @@ const DiplomacyEventList = <T extends CommonCardData>({
               content={getContent ? getContent(item) : item.event_content}
               category={getCategory ? getCategory(item) : item.event_category}
               url={getUrl?.(item) ?? item.url}
+              isSummary={isSummary}
             />
           </CardWrapper>
         ))}
