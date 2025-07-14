@@ -66,6 +66,7 @@ const HeaderTop = () => {
   const handleSelectLanguage = (lang: "ko" | "en") => {
     setLanguage(lang);
     localStorage.setItem("selectedLanguage", lang);
+    window.dispatchEvent(new Event("languageChanged"));
     setIsOpen(false);
 
     const gtCombo = document.querySelector(

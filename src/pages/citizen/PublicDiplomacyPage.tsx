@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import CitizenEvents from "./components/CitizenEvents";
 import CitizenOpinion from "./components/CitizenOpinion";
 
@@ -11,9 +12,34 @@ const CITY_LIST = [
 ];
 
 const PublicDiplomacyPage = () => {
+  const [language, setLanguage] = useState<"ko" | "en">("ko");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("selectedLanguage") as "ko" | "en";
+    setLanguage(storedLang || "ko");
+
+    const handleLanguageChange = () => {
+      const updatedLang = localStorage.getItem("selectedLanguage") as
+        | "ko"
+        | "en";
+      setLanguage(updatedLang || "ko");
+    };
+
+    window.addEventListener("languageChanged", handleLanguageChange);
+    window.addEventListener("storage", handleLanguageChange);
+    return () => {
+      window.removeEventListener("languageChanged", handleLanguageChange);
+      window.removeEventListener("storage", handleLanguageChange);
+    };
+  }, []);
+
+  const bannerImage = `/images/main/citizenBanner${
+    language === "en" ? "_en" : ""
+  }.png`;
+
   return (
     <>
-      <img src="/images/main/citizenBanner.png" />
+      <img src={bannerImage} alt="public diplomacy banner" />
       <CitizenEvents labelList={CITY_LIST} />
       <CitizenOpinion labelList={CITY_LIST} />
     </>
