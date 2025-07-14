@@ -25,16 +25,20 @@ const CityMap = ({ city, data }: CityMapProps) => {
   const imageSrc = city ? `/images/cityMap/${cityNameToEn[city]}.png` : "";
 
   const sisterChips =
-    data?.sister_city?.cities.map((c) => ({
-      text: `#${c.city}`,
-    })) ?? [];
+    data?.sister_city?.cities
+      .filter((c) => c.city !== "기타")
+      .map((c) => ({
+        text: `#${c.city}`,
+      })) ?? [];
 
   const friendshipChips =
-    data?.friendship_city?.cities.map((c) => ({
-      text: `#${c.city}`,
-      bgColor: theme.colors.yellow03,
-      textColor: theme.colors.yellow01,
-    })) ?? [];
+    data?.friendship_city?.cities
+      .filter((c) => c.city !== "기타")
+      .map((c) => ({
+        text: `#${c.city}`,
+        bgColor: theme.colors.yellow03,
+        textColor: theme.colors.yellow01,
+      })) ?? [];
 
   return (
     <>
