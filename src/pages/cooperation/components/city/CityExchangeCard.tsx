@@ -1,6 +1,7 @@
 import type { CityCategoryItem } from "@apis/cooperation/getCityCategory";
 import MainTitle from "@components/MainTitle";
 import { fonts } from "@styles/fonts";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -9,6 +10,27 @@ interface Props {
 }
 
 const CityExchangeCard = ({ city, data }: Props) => {
+  const [language, setLanguage] = useState<"ko" | "en">("ko");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("selectedLanguage") as "ko" | "en";
+    setLanguage(storedLang || "ko");
+
+    const handleLanguageChange = () => {
+      const updatedLang = localStorage.getItem("selectedLanguage") as
+        | "ko"
+        | "en";
+      setLanguage(updatedLang || "ko");
+    };
+
+    window.addEventListener("languageChanged", handleLanguageChange);
+    window.addEventListener("storage", handleLanguageChange);
+    return () => {
+      window.removeEventListener("languageChanged", handleLanguageChange);
+      window.removeEventListener("storage", handleLanguageChange);
+    };
+  }, []);
+
   return (
     <>
       <MainTitle
@@ -22,7 +44,9 @@ const CityExchangeCard = ({ city, data }: Props) => {
         {data?.map((item, idx) => (
           <img
             key={idx}
-            src={`/images/cooperation/card/${item.exchange_name}.png`}
+            src={`/images/cooperation/card/${item.exchange_name}${
+              language === "en" ? "_en" : ""
+            }.png`}
             alt={item.exchange_name}
           />
         ))}
