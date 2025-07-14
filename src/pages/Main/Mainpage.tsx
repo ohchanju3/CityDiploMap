@@ -40,7 +40,7 @@ const Mainpage = () => {
     };
 
     loadEvent();
-  });
+  }, []);
 
   const navigate = useNavigate();
 

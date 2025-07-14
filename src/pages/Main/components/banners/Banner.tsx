@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import * as s from "./banner_styled";
 import Button from "@components/Button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "src/hooks/useLanguage";
 
-const images = [
+const baseImages = [
   {
-    src: "/images/main/banner1.png",
+    filename: "banner1",
     buttonText: "자세히 보기",
     buttonColor: "blue",
     link: "/cooperation",
   },
   {
-    src: "/images/main/banner2.png",
+    filename: "banner2",
     buttonText: "자세히 보기",
     buttonColor: "green",
     link: "/recommend",
   },
   {
-    src: "/images/main/banner3.png",
+    filename: "banner3",
     buttonText: "자세히 보기",
     buttonColor: "blue",
     link: "/citizen",
@@ -27,6 +28,19 @@ const images = [
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const language = useLanguage();
+
+  const images = useMemo(
+    () =>
+      baseImages.map((item) => ({
+        ...item,
+        src: `/images/main/${item.filename}${
+          language === "en" ? "_en" : ""
+        }.png`,
+      })),
+    [language]
+  );
+
   const total = images.length;
   const currentBanner = images[currentIndex];
 
@@ -42,14 +56,12 @@ const Banner = () => {
     setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
   };
 
-  // 자동 슬라이드
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
     }, 3000);
-
     return () => clearInterval(interval);
-  }, []);
+  }, [total]);
 
   return (
     <s.BannerWrapper>

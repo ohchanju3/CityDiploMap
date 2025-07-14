@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { fonts } from "@styles/fonts";
+import { useLanguage } from "src/hooks/useLanguage";
+
+export interface OptionItem {
+  value: string;
+  label_ko: string;
+  label_en: string;
+}
 
 interface FilterItemProps {
   title: string;
-  options: string[];
+  options: OptionItem[];
   selected: string | null;
   onSelect: (value: string) => void;
   placeholder?: string;
@@ -27,22 +34,38 @@ const FilterItem = ({
     setIsOpen(false);
   };
 
+  const language = useLanguage();
+
+  const selectedOption = options.find((opt) => opt.value === selected);
+
   return (
     <FilterItemWrapper $gap={gap}>
       <FilterItemTitle>{title}</FilterItemTitle>
       <DropdownWrapper>
-        <DropdownButton onClick={toggleDropdown} $hasValue={!!selected}>
-          {selected || placeholder}
+        <DropdownButton
+          onClick={toggleDropdown}
+          $hasValue={!!selected}
+          className="notranslate"
+        >
+          {selectedOption
+            ? language === "en"
+              ? selectedOption.label_en
+              : selectedOption.label_ko
+            : placeholder}
           <img
             src={isOpen ? "/icons/arrowUp.svg" : "/icons/arrowDown.svg"}
             alt="toggle"
           />
         </DropdownButton>
+
         {isOpen && (
           <DropdownList>
             {options.map((option) => (
-              <DropdownItem key={option} onClick={() => handleSelect(option)}>
-                {option}
+              <DropdownItem
+                key={option.value}
+                onClick={() => handleSelect(option.value)}
+              >
+                {language === "en" ? option.label_en : option.label_ko}
               </DropdownItem>
             ))}
           </DropdownList>
@@ -94,7 +117,7 @@ const DropdownButton = styled.section<{ $hasValue: boolean }>`
 const DropdownList = styled.ul`
   position: absolute;
   top: 100%;
-  width: 100%;
+  min-width: 100%;
   background-color: ${({ theme }) => theme.colors.gray07};
   border: 1px solid ${({ theme }) => theme.colors.gray05};
   border-radius: 0.38rem;

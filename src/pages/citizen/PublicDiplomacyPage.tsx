@@ -1,5 +1,6 @@
 import CitizenEvents from "./components/CitizenEvents";
 import CitizenOpinion from "./components/CitizenOpinion";
+import { useLanguage } from "src/hooks/useLanguage";
 
 const CITY_LIST = [
   "전체",
@@ -11,9 +12,15 @@ const CITY_LIST = [
 ];
 
 const PublicDiplomacyPage = () => {
+  const language = useLanguage();
+
+  const bannerImage = `/images/main/citizenBanner${
+    language === "en" ? "_en" : ""
+  }.png`;
+
   return (
     <>
-      <img src="/images/main/citizenBanner.png" />
+      <img src={bannerImage} alt="public diplomacy banner" />
       <CitizenEvents labelList={CITY_LIST} />
       <CitizenOpinion labelList={CITY_LIST} />
     </>

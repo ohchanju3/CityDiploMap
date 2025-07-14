@@ -26,6 +26,7 @@ import ExchangeEnvIssue from "./components/ExchangeEnvIssue";
 import { getEnvIssue, type EnvIssueItem } from "@apis/recommend/getEnvIssue";
 import Spinner from "@components/Spinner";
 import styled from "styled-components";
+import { useLanguage } from "src/hooks/useLanguage";
 
 const RecommendPage = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -34,6 +35,7 @@ const RecommendPage = () => {
   const [purpose, setPurpose] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isPdfDownloading, setIsPdfDownloading] = useState(false);
+  const language = useLanguage();
 
   const isAllSelected = country && city && category && purpose;
 
@@ -47,28 +49,34 @@ const RecommendPage = () => {
       options: CITY_OPTIONS,
       selected: city,
       onSelect: setCity,
-      placeholder: "경기도",
+      placeholder: language === "en" ? "Gyeonggi-do" : "경기도",
     },
     {
       title: "국가",
       options: COUNTRY_OPTIONS,
       selected: country,
       onSelect: setCountry,
-      placeholder: "베트남",
+      placeholder: language === "en" ? "Vietnam" : "베트남",
     },
     {
       title: "교류분야",
       options: CATEGORY_OPTIONS,
       selected: category,
       onSelect: setCategory,
-      placeholder: "보건 · 환경 · 기술",
+      placeholder:
+        language === "en"
+          ? "Health · Environment · Technology"
+          : "보건 · 환경 · 기술",
     },
     {
       title: "협력 목적",
       options: PURPOSE_OPTIONS,
       selected: purpose,
       onSelect: setPurpose,
-      placeholder: "기본 파트너 강화",
+      placeholder:
+        language === "en"
+          ? "Strengthening Existing Partners"
+          : "기존 파트너 강화",
     },
   ];
 
