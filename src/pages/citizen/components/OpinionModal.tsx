@@ -19,8 +19,13 @@ const OpinionModal = ({
 
   const isAllSelected = title.trim() !== "" && content.trim() !== "";
 
+  const CITY_OPTIONS_WITH_ALL = [
+    { value: "전체", label_ko: "전체", label_en: "All" },
+    ...CITY_OPTIONS,
+  ];
+
   const getCityId = (city: string): number => {
-    const id = CITY_OPTIONS.findIndex((item) => item.value === city);
+    const id = CITY_OPTIONS_WITH_ALL.findIndex((item) => item.value === city);
     return id;
   };
 
@@ -50,7 +55,7 @@ const OpinionModal = ({
       <CityChoice>
         <FilterItem
           title="지방자치단체"
-          options={CITY_OPTIONS}
+          options={CITY_OPTIONS_WITH_ALL}
           selected={selectedCity}
           onSelect={setSelectedCity}
           placeholder="전체"
