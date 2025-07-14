@@ -17,7 +17,7 @@ const HeaderTop = () => {
   const [language, setLanguage] = useState<"ko" | "en">("ko");
   const navigate = useNavigate();
 
-  // Google 번역기 초기화 및 삽입
+  // Google 번역기 초기화 및 언어 기억 적용
   useEffect(() => {
     const savedLang = localStorage.getItem("selectedLanguage") as
       | "ko"
@@ -33,27 +33,37 @@ const HeaderTop = () => {
       document.body.appendChild(div);
     }
 
+    // 중복 초기화 방지
     if (window.googleTranslateElementInitLoaded) return;
 
     window.googleTranslateElementInit = () => {
       window.googleTranslateElementInitLoaded = true;
 
-      if (window.google?.translate?.TranslateElement) {
-        new window.google.translate.TranslateElement(
-          { pageLanguage: "ko", autoDisplay: false },
-          "google_translate_element"
-        );
+      new window.google.translate.TranslateElement(
+        { pageLanguage: "ko", autoDisplay: false },
+        "google_translate_element"
+      );
 
-        setTimeout(() => {
-          const gtCombo = document.querySelector(
-            ".goog-te-combo"
-          ) as HTMLSelectElement;
-          if (gtCombo && savedLang) {
-            gtCombo.value = savedLang;
-            gtCombo.dispatchEvent(new Event("change"));
-          }
-        }, 500);
-      }
+      const trySetLanguage = () => {
+        const gtCombo = document.querySelector(
+          ".goog-te-combo"
+        ) as HTMLSelectElement;
+        if (gtCombo && savedLang) {
+          gtCombo.value = savedLang;
+          gtCombo.dispatchEvent(new Event("change"));
+
+          gtCombo.focus();
+          gtCombo.blur();
+
+          document.body.style.display = "none";
+          void document.body.offsetHeight;
+          document.body.style.display = "";
+        } else {
+          setTimeout(trySetLanguage, 200);
+        }
+      };
+
+      setTimeout(trySetLanguage, 500);
     };
 
     const script = document.createElement("script");
@@ -63,18 +73,37 @@ const HeaderTop = () => {
     document.body.appendChild(script);
   }, []);
 
+  // 언어 선택 처리
   const handleSelectLanguage = (lang: "ko" | "en") => {
     setLanguage(lang);
     localStorage.setItem("selectedLanguage", lang);
     window.dispatchEvent(new Event("languageChanged"));
-    setIsOpen(false);
 
     const gtCombo = document.querySelector(
       ".goog-te-combo"
     ) as HTMLSelectElement;
     if (gtCombo) {
       gtCombo.value = lang;
-      gtCombo.dispatchEvent(new Event("change"));
+
+      // 2회 연속 트리거
+      const changeTwice = () => {
+        gtCombo.dispatchEvent(new Event("change"));
+        setTimeout(() => {
+          gtCombo.dispatchEvent(new Event("change"));
+
+          gtCombo.focus();
+          gtCombo.blur();
+          document.body.style.display = "none";
+          void document.body.offsetHeight;
+          document.body.style.display = "";
+
+          setIsOpen(false);
+        }, 200);
+      };
+
+      setTimeout(changeTwice, 100);
+    } else {
+      setIsOpen(false);
     }
   };
 
