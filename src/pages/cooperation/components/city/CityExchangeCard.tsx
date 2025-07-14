@@ -1,7 +1,7 @@
 import type { CityCategoryItem } from "@apis/cooperation/getCityCategory";
 import MainTitle from "@components/MainTitle";
 import { fonts } from "@styles/fonts";
-import { useEffect, useState } from "react";
+import { useLanguage } from "src/hooks/useLanguage";
 import styled from "styled-components";
 
 interface Props {
@@ -10,26 +10,7 @@ interface Props {
 }
 
 const CityExchangeCard = ({ city, data }: Props) => {
-  const [language, setLanguage] = useState<"ko" | "en">("ko");
-
-  useEffect(() => {
-    const storedLang = localStorage.getItem("selectedLanguage") as "ko" | "en";
-    setLanguage(storedLang || "ko");
-
-    const handleLanguageChange = () => {
-      const updatedLang = localStorage.getItem("selectedLanguage") as
-        | "ko"
-        | "en";
-      setLanguage(updatedLang || "ko");
-    };
-
-    window.addEventListener("languageChanged", handleLanguageChange);
-    window.addEventListener("storage", handleLanguageChange);
-    return () => {
-      window.removeEventListener("languageChanged", handleLanguageChange);
-      window.removeEventListener("storage", handleLanguageChange);
-    };
-  }, []);
+  const language = useLanguage();
 
   return (
     <>

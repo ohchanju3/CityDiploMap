@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import CitizenEvents from "./components/CitizenEvents";
 import CitizenOpinion from "./components/CitizenOpinion";
+import { useLanguage } from "src/hooks/useLanguage";
 
 const CITY_LIST = [
   "전체",
@@ -12,26 +12,7 @@ const CITY_LIST = [
 ];
 
 const PublicDiplomacyPage = () => {
-  const [language, setLanguage] = useState<"ko" | "en">("ko");
-
-  useEffect(() => {
-    const storedLang = localStorage.getItem("selectedLanguage") as "ko" | "en";
-    setLanguage(storedLang || "ko");
-
-    const handleLanguageChange = () => {
-      const updatedLang = localStorage.getItem("selectedLanguage") as
-        | "ko"
-        | "en";
-      setLanguage(updatedLang || "ko");
-    };
-
-    window.addEventListener("languageChanged", handleLanguageChange);
-    window.addEventListener("storage", handleLanguageChange);
-    return () => {
-      window.removeEventListener("languageChanged", handleLanguageChange);
-      window.removeEventListener("storage", handleLanguageChange);
-    };
-  }, []);
+  const language = useLanguage();
 
   const bannerImage = `/images/main/citizenBanner${
     language === "en" ? "_en" : ""
