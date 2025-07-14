@@ -4,15 +4,7 @@ import { fonts } from "@styles/fonts";
 import FilterItem from "@components/Filters/FilterItem";
 import Button from "@components/Button";
 import { postOpinion } from "@apis/citizen/postOpinion";
-
-const CITY_LIST = [
-  "전체",
-  "경기도",
-  "부산광역시",
-  "서울특별시",
-  "인천광역시",
-  "제주특별자치도",
-];
+import { CITY_OPTIONS } from "@constants/filterOptions";
 
 const OpinionModal = ({
   onClose,
@@ -28,7 +20,7 @@ const OpinionModal = ({
   const isAllSelected = title.trim() !== "" && content.trim() !== "";
 
   const getCityId = (city: string): number => {
-    const id = CITY_LIST.indexOf(city);
+    const id = CITY_OPTIONS.findIndex((item) => item.value === city);
     return id;
   };
 
@@ -58,7 +50,7 @@ const OpinionModal = ({
       <CityChoice>
         <FilterItem
           title="지방자치단체"
-          options={CITY_LIST}
+          options={CITY_OPTIONS}
           selected={selectedCity}
           onSelect={setSelectedCity}
           placeholder="전체"
