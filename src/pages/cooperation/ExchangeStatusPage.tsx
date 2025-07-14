@@ -38,12 +38,26 @@ import {
   getCityVision,
   type CityVisionData,
 } from "@apis/cooperation/getCityVision";
+import { useLanguage } from "src/hooks/useLanguage";
 
 const ExchangeStatusPage = () => {
   const [activeTab, setActiveTab] = useState<"국가" | "지자체">("국가");
   const [country, setCountry] = useState<string | null>(null);
   const [city, setCity] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const language = useLanguage();
+
+  // 국가 선택 변경 시 isSubmitted 초기화
+  const handleCountrySelect = (value: string) => {
+    setCountry(value);
+    setIsSubmitted(false);
+  };
+
+  // 지자체 선택 변경 시 isSubmitted 초기화
+  const handleCitySelect = (value: string) => {
+    setCity(value);
+    setIsSubmitted(false);
+  };
 
   //-------국가 탭--------------------------------//
   const [categoryData, setCategoryData] = useState<CategoryRatioData | null>(
@@ -131,8 +145,8 @@ const ExchangeStatusPage = () => {
                 title: "국가",
                 options: COUNTRY_OPTIONS,
                 selected: country,
-                onSelect: setCountry,
-                placeholder: "베트남",
+                onSelect: handleCountrySelect,
+                placeholder: language === "en" ? "Vietnam" : "베트남",
               },
             ]}
           />
@@ -169,8 +183,8 @@ const ExchangeStatusPage = () => {
                 title: "지방자치단체",
                 options: CITY_OPTIONS,
                 selected: city,
-                onSelect: setCity,
-                placeholder: "경기도",
+                onSelect: handleCitySelect,
+                placeholder: language === "en" ? "Gyeonggi-do" : "경기도",
               },
             ]}
           />
