@@ -16,10 +16,10 @@ const ExchangeProposal = ({ data }: ProposalProps) => {
         marginTop="7.81rem"
       />
       <DiplomacyEventList
-        data={data.recommended_strategy_types}
-        getTitle={(item) => item.type}
+        data={data.exchange_cooperation_projects}
+        getTitle={(item) => item.project_name}
         getContent={(item) => item.description}
-        getCategory={() => "전략유형"}
+        getCategory={(item) => item.project_category}
         isSummary={false}
       />
     </>
