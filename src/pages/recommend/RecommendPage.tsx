@@ -76,7 +76,7 @@ const RecommendPage = () => {
       placeholder:
         language === "en"
           ? "Strengthening Existing Partners"
-          : "기존 파트너 강화",
+          : "기존 협력 강화",
     },
   ];
 

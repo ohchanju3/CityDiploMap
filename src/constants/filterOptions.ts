@@ -42,7 +42,7 @@ export const CATEGORY_OPTIONS: OptionItem[] = [
 export const PURPOSE_OPTIONS: OptionItem[] = [
   {
     value: "기존 파트너 강화",
-    label_ko: "기존 파트너 강화",
+    label_ko: "기존 교류 강화",
     label_en: "Strengthening Existing Partners",
   },
   {
